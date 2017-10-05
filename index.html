@@ -3,6 +3,7 @@
 <head>
 	<title>IPA Generator</title>
 	<script type="text/javascript">
+		import Chain from 'markov-chains';
 		$(document).ready(function(){
 			$("#data").hide()
 		}
@@ -27,9 +28,12 @@
 			var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
 			var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
 			var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
-
+			var audioFiles = 
 			//Translate to language
 			//Speak
+			var p = "a"
+			var a = new Audio(audioFiles[p]);
+			audio.play();
 		}
 		function read()
 		{
