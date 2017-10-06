@@ -178,7 +178,7 @@ function transform(phonA)
     var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
 
     var out = ""
-    for(int i = 0; i<phonA.length; i++)
+    for(var i = 0; i<phonA.length; i++)
     {
         var el = phonA[i];
         if(arpaCons.includes(el))
