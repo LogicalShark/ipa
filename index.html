@@ -1,98 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>IPA Generator</title>
-	<script type="text/javascript">
-		import Chain from 'markov-chains';
-		$(document).ready(function(){
-			$("#data").hide()
-		}
-		function generate() 
-		{
-			//API Keys
-			//(top tier security 👌)
-			//103869fa
-			//79e16dba710549c398ebc4bec069d0dd
+    <title>IPA Generator</title>
+    <script type="text/javascript">
+        import Chain from 'markov-chains';
+        $(document).ready(function(){
+            $("#data").hide()
+        }
+        function createTable(input, order=4) 
+        {
+            var table = []
+            //Make the index table
+            for (var i = 0; i<len(input); i++)
+            {
+                var sub = input.substr(i, order);
+                table[sub] = [];
+            }              
+            //Count the following strings for each string
+            for (var j = 0; j<(len(input) - order); j++) 
+            {
+                var index = input.substr(j, order);
+                var next = input.substr(j+order, order);
+                if(table[index][next]!=undefined)
+                    table[index][next]++;
+                else
+                    table[index][next] = 1;
+            }
+            return table;
+        }
+        function createText(first=' ', length=2000, table, order=4) 
+        {
+            var chars = first;
+            if(first ==' ')
+            {
+                chars = table[Math.floor(Math.random()*items.length)];
+            }
+            var output = chars;
+            for (var k = 0; k<(length/order); k++) 
+            {
+                newchars = createNextChars(table[chars]);
+                if(newchars != null)
+                {
+                    chars = newchars;
+                    output += newchars;
+                } 
+                else 
+                {       
+                    chars = table[Math.floor(Math.random()*items.length)];
+                }
+            }
+            return output;
+        }
+        function sum(a,b)
+        {
+            return a+b;
+        }
+        function createNextChars(array) 
+        {
+            if(array==undefined)
+                return null;
+            var total = total.reduce(sum)
+            var rand  = Math.floor(Math.random() * (total - 1)) + 1;
+            for (var l = 0; l<array.length; l++) 
+            {
+                var weight = array[l];
+                if (rand <= weight)
+                    return item;
+                rand -= weight;
+            }
+        }
+        function generate() 
+        {
+            //API Keys
+            //(top tier security 👌)
+            //103869fa
+            //79e16dba710549c398ebc4bec069d0dd
 
-			//Phonemes in ARPABET and IPA formats
-			var arpCons = ["P","B","EM","T","D","EN","CH","DH","DX","EL","EN","F","G","H","JH","K","L","M","N","NG","NX","Q","R","S","SH","T","TH","V","w","WH","Y","Z","ZH"];
-			var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
-			var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
-			var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
-			var audioFiles = 
+            //Phonemes in ARPABET and IPA formats
+            var arpCons = ["P","B","EM","T","D","EN","CH","DH","DX","EL","EN","F","G","H","JH","K","L","M","N","NG","NX","Q","R","S","SH","T","TH","V","w","WH","Y","Z","ZH"];
+            var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
+            var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
+            var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
+            var audioFiles = 
 
-			//Read inputs
-			var input = document.getElementyById("input").value();
-			var length = document.getElementyById("length").value();
-			var order = document.getElementyById("order").value();
+            //Read inputs
+            var input = document.getElementyById("input").value();
+            var length = document.getElementyById("length").value();
+            var order = document.getElementyById("order").value();
 
-			//Translate to ipa
-			var re = /<tt>.*<\\tt><\/div>/;
-			var iwords = input.split(" ");
-			for (var i = 0, len = iwords.length; i < len; i++)
-			{
-				var w = iwords[i];
-				$("#data").load("http://www.speech.cs.cmu.edu/cgi-bin/cmudict?in="+w);
-				var out = re.exec(document.getElementyById("data").value);
-				console.log(out);
-				var final = out.substring(4,out.length-14);
-			}
-			//Generate from ipa
+            //Translate to ipa
+            var re = /<tt>.*<\\tt><\/div>/;
+            var iwords = input.split(" ");
+            for (var i = 0, len = iwords.length; i < len; i++)
+            {
+                var w = iwords[i];
+                $("#data").load("http://www.speech.cs.cmu.edu/cgi-bin/cmudict?in="+w);
+                var out = re.exec(document.getElementyById("data").value);
+                console.log(out);
+                var final = out.substring(4,out.length-14);
+            }
+            //Generate from ipa
 
-			//Translate to language
-			//Speak
-			var p = "a"
-			var a = new Audio(audioFiles[p]);
-			audio.play();
-		}
-		function read()
-		{
-			var arpCons = ["P","B","EM","T","D","EN","CH","DH","DX","EL","EN","F","G","H","JH","K","L","M","N","NG","NX","Q","R","S","SH","T","TH","V","w","WH","Y","Z","ZH"];
-			var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
-			var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
-			var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
-		}
-	</script>
+            //Translate to language
+            //Speak
+            var p = "a"
+            var a = new Audio(audioFiles[p]);
+            audio.play();
+        }
+        function read()
+        {
+            var arpCons = ["P","B","EM","T","D","EN","CH","DH","DX","EL","EN","F","G","H","JH","K","L","M","N","NG","NX","Q","R","S","SH","T","TH","V","w","WH","Y","Z","ZH"];
+            var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
+            var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
+            var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
+        }
+    </script>
 </head>
 <body>
-	<p id="data"></p>
-	<div>
-		<input type="text" id="input" placeholder="Input">
-		<input type="text" id="length" placeholder="Length">
-		<input type="text" id="order" placeholder="Order">
-		<button onClick="generate()">Generate</button>
-		<p id="output"></p>
-		<button onClick="read()">Read</button>
-	</div>
-	<div>
-		<h1>About</h1>
-		<p>Created by Marcus Alder, 2017. <br\>Uses <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronunciation Dictionary</a></p>
-	</div>
+    <p id="data"></p>
+    <div>
+        <input type="text" id="input" placeholder="Input">
+        <input type="text" id="length" placeholder="Length">
+        <input type="text" id="order" placeholder="Order">
+        <button onClick="generate()">Generate</button>
+        <p id="output"></p>
+        <button onClick="read()">Read</button>
+    </div>
+    <div>
+        <h1>About</h1>
+        <p>Created by Marcus Alder, 2017. <br\>Uses <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronunciation Dictionary</a></p>
+    </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>
 
 <!--
-	Ignore this extra stuff from previous iterations
-	
-	<phoneme alphabet="ipa" ph="/bɪnˈtuːrɒŋ/ ">Binturong</phoneme>
+    Ignore this extra stuff from previous iterations
+    
+    <phoneme alphabet="ipa" ph="/bɪnˈtuːrɒŋ/ ">Binturong</phoneme>
 https://github.com/mphilli/English_to_IPA
-				Con-00a p
-			Con-01a B b
-			Con-13a m
-			Con-02a t
-			Con-03a d
-			Con-15a n
-			Con-23a r tap
-			Con-27a f
-			Con-28a v
-			Con-29a Theta
-			// var xhr = new XMLHttpRequest();
-			// xhr.Accept = "application/json";
-			// xhr.app_id = "103869fa";
-			// xhr.app_key = "79e16dba710549c398ebc4bec069d0dd";
-			// xhr.open("GET", "https://od-api.oxforddictionaries.com:443/api/v1/entries/en/"+word, false);
-			// xhr.send();
-			// var output = JSON.parse(xhr).results.lexicalEntries.entries.pronunciations.phoneticSpelling
+                Con-00a p
+            Con-01a B b
+            Con-13a m
+            Con-02a t
+            Con-03a d
+            Con-15a n
+            Con-23a r tap
+            Con-27a f
+            Con-28a v
+            Con-29a Theta
+            // var xhr = new XMLHttpRequest();
+            // xhr.Accept = "application/json";
+            // xhr.app_id = "103869fa";
+            // xhr.app_key = "79e16dba710549c398ebc4bec069d0dd";
+            // xhr.open("GET", "https://od-api.oxforddictionaries.com:443/api/v1/entries/en/"+word, false);
+            // xhr.send();
+            // var output = JSON.parse(xhr).results.lexicalEntries.entries.pronunciations.phoneticSpelling
 
--->
+        -->
