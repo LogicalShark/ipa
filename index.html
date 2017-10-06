@@ -65,19 +65,8 @@
                 rand -= weight;
             }
         }
-        function generate() 
+        function getPhonemes(input)
         {
-            //API Keys
-            //(top tier security 👌)
-            //103869fa
-            //79e16dba710549c398ebc4bec069d0dd
-
-            //Read inputs
-            var input = document.getElementyById("input").value();
-            var length = document.getElementyById("length").value();
-            var order = document.getElementyById("order").value();
-
-            //Get phonemes
             var phonA = ""
             var re = /<tt>.*<\\tt><\/div>/;
             var iwords = input.split(" ");
@@ -90,16 +79,96 @@
                 var final = out.substring(4,out.length-14);
                 phonA+=final;
             }
+            return phonA;
+        }
+        function generate() 
+        {
+            //API Keys
+            //(top tier security 👌)
+            //103869fa
+            //79e16dba710549c398ebc4bec069d0dd
+
+            //Read inputs
+            var input = document.getElementyById("input").value();
+            var length = document.getElementyById("length").value();
+            var order = document.getElementyById("order").value();
+            //Ensure correct format, remove punctuation
+            //Get phonemes
+            var phonA = getPhonemes(input);            
             //Translate to IPA
             var phonI = transform(phonA);
             //Generate output
             var t = createTable(phonI, order);
             var out = createText(' ', length, t, order);
             console.log(out);
-            //Speak output
-            // var p = "a"
-            // var a = new Audio(audioFiles[p]);
-            // audio.play();
+            //Get audio files
+            var audios = getAudioFiles(out);
+        }
+        function getAudioFiles(out)
+        {
+            audios = []
+            var j = 0;
+            var len = out.length;
+            while(j<len)
+            {
+                //1 char left
+                var c = out[j]
+                if((len - j)==1)
+                {
+                    audios.append(c);
+                    j+=1;
+                    continue;
+                }
+                //2 chars left
+                var c2 = c + out[j+1];
+                if((len - j)==2)
+                {
+                    if(getAFile(c2))
+                    {
+                        audios.append(c2);
+                        j+=2;
+                    }
+                    else
+                    {
+                        audios.append(c);
+                        j+=1;
+                    }
+                    continue;
+                }
+                //Default
+                var c3 = c2 + out[j+2];
+                if(hasAFile(c3))
+                {
+                    audios.append(c3)
+                    j+=3;
+                }
+                else if(getAFile(c2))
+                {
+                    audios.append(c2);
+                    j+=2;
+                }
+                else
+                {
+                    audios.append(c);
+                    j+=1;
+                }
+            }
+        }
+        function playAudio(audios)
+        {
+            for(var i = 0; i<audios.length; i++)
+            {
+                var p = audios[i];
+                var a = new Audio(audioFiles[p]);
+                a.play();
+            }
+        }
+        function hasAFile(chars)
+        {
+            var audioFiles = []
+            if(audioFiles.includes(chars))
+                return true
+            return false;
         }
         function transform(phonA)
         {
