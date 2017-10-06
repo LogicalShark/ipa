@@ -3,9 +3,6 @@
 <head>
     <title>IPA Generator</title>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $("#data").hide()
-        }
         function createTable(input, order=4) 
         {
             var table = []
@@ -75,19 +72,13 @@
             //103869fa
             //79e16dba710549c398ebc4bec069d0dd
 
-            //Phonemes in ARPABET and IPA formats
-            var arpCons = ["P","B","EM","T","D","EN","CH","DH","DX","EL","EN","F","G","H","JH","K","L","M","N","NG","NX","Q","R","S","SH","T","TH","V","w","WH","Y","Z","ZH"];
-            var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
-            var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
-            var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
-            var audioFiles = 
-
             //Read inputs
             var input = document.getElementyById("input").value();
             var length = document.getElementyById("length").value();
             var order = document.getElementyById("order").value();
 
-            //Translate to ipa
+            //Get phonemes
+            var phonA = ""
             var re = /<tt>.*<\\tt><\/div>/;
             var iwords = input.split(" ");
             for (var i = 0, len = iwords.length; i < len; i++)
@@ -97,26 +88,44 @@
                 var out = re.exec(document.getElementyById("data").value);
                 console.log(out);
                 var final = out.substring(4,out.length-14);
+                phonA+=final;
             }
-            //Generate from ipa
-
-            //Translate to language
-            //Speak
-            var p = "a"
-            var a = new Audio(audioFiles[p]);
-            audio.play();
+            //Translate to IPA
+            var phonI = transform(phonA);
+            //Generate output
+            var t = createTable(phonI, order);
+            var out = createText(' ', length, t, order);
+            console.log(out);
+            //Speak output
+            // var p = "a"
+            // var a = new Audio(audioFiles[p]);
+            // audio.play();
         }
-        function read()
+        function transform(phonA)
         {
+            //ARPABET and IPA phonemes
             var arpCons = ["P","B","EM","T","D","EN","CH","DH","DX","EL","EN","F","G","H","JH","K","L","M","N","NG","NX","Q","R","S","SH","T","TH","V","w","WH","Y","Z","ZH"];
             var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
             var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
             var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
+
+            var out = ""
+            for(int i = 0; i<phonA.length; i++)
+            {
+                var el = phonA[i];
+                if(arpaCons.includes(el))
+                    out += ipaCons[arpaCons.indexOf(el)];
+                else if(arpaVow.includes(el))
+                    out += ipaVow[arpaVow.indexOf(el)];
+                else
+                    out+=el;
+            }
+            return out;
         }
     </script>
 </head>
 <body>
-    <p id="data"></p>
+    <p id="data" style="display: none;"></p>
     <div>
         <input type="text" id="input" placeholder="Input">
         <input type="text" id="length" placeholder="Length">
