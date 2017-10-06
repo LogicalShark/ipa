@@ -9,19 +9,10 @@
 		}
 		function generate() 
 		{
-			//Language selection
-			//Enter/choose input
-			//Enter settings
-			//Translate to ipa
+			//API Keys
+			//(top tier security 👌)
 			//103869fa
 			//79e16dba710549c398ebc4bec069d0dd
-			var input = Document.getElementyById("input").value()
-			$("#data").load("http://www.speech.cs.cmu.edu/cgi-bin/cmudict?in=thing");
-			var re = /<tt>.*<\\tt><\/div>/;
-			var out = re.exec(Document.getElementyById("data"));
-			console.log(out);
-			var final = out.substring(4,out.length-14);
-			//Generate from ipa
 
 			//Phonemes in ARPABET and IPA formats
 			var arpCons = ["P","B","EM","T","D","EN","CH","DH","DX","EL","EN","F","G","H","JH","K","L","M","N","NG","NX","Q","R","S","SH","T","TH","V","w","WH","Y","Z","ZH"];
@@ -29,6 +20,25 @@
 			var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
 			var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
 			var audioFiles = 
+
+			//Read inputs
+			var input = document.getElementyById("input").value();
+			var length = document.getElementyById("length").value();
+			var order = document.getElementyById("order").value();
+
+			//Translate to ipa
+			var re = /<tt>.*<\\tt><\/div>/;
+			var iwords = input.split(" ");
+			for (var i = 0, len = iwords.length; i < len; i++)
+			{
+				var w = iwords[i];
+				$("#data").load("http://www.speech.cs.cmu.edu/cgi-bin/cmudict?in="+w);
+				var out = re.exec(document.getElementyById("data").value);
+				console.log(out);
+				var final = out.substring(4,out.length-14);
+			}
+			//Generate from ipa
+
 			//Translate to language
 			//Speak
 			var p = "a"
