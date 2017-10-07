@@ -1,6 +1,6 @@
 function createTable(input, order=4) 
 {
-    var table = []
+    var table = [];
     //Make the index table
     for (var i = 0; i<len(input); i++)
     {
@@ -50,7 +50,7 @@ function createNextChars(array)
 {
     if(array==undefined)
         return null;
-    var total = total.reduce(sum)
+    var total = total.reduce(sum);
     var rand  = Math.floor(Math.random() * (total - 1)) + 1;
     for (var l = 0; l<array.length; l++) 
     {
