@@ -24,7 +24,7 @@ function createText(first=' ', length=2000, table, order=4)
     var chars = first;
     if(first ==' ')
     {
-        chars = table[Math.floor(Math.random()*items.length)];
+        chars = table[Math.floor(Math.random()*table.length];
     }
     var output = chars;
     for (var k = 0; k<(length/order); k++) 
