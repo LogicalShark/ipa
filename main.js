@@ -138,9 +138,11 @@ function generate()
     var length = (document.getElementById("length")).value;
     var order = (document.getElementById("order")).value;
     //Get phonemes
-    var phonA = getPhonemes(input);            
+    var phonA = getPhonemes(input);
+    console.log(phonA);
     //Translate to IPA
     var phonI = transform(phonA);
+    console.log(phoneI);
     //Generate output
     var t = createTable(phonI, order);
     var out = createText(' ', length, t, order);
