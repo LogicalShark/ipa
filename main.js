@@ -60,7 +60,7 @@ function createNextChars(array)
         rand -= weight;
     }
 }
-function makeHttpObject() {
+/*function makeHttpObject() {
   try {return new XMLHttpRequest();}
   catch (error) {}
   try {return new ActiveXObject("Msxml2.XMLHTTP");}
@@ -69,30 +69,60 @@ function makeHttpObject() {
   catch (error) {}
 
   throw new Error("Could not create HTTP request object.");
+}*/
+function readFile()
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", "cmudict.txt", false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                return allText;
+            }
+        }
+    }
+    rawFile.send(null);
+}
+function nextLetter(s)
+{
+    return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
+        var c= a.charCodeAt(0);
+        switch(c){
+            case 90: return '{';
+            case 122: return '{';
+            default: return String.fromCharCode(++c);
+        }
+    });
 }
 function getPhonemes(i)
 {
     //Ensure correct format, remove punctuation
     input = i.replace(/\n/g, '');
 
-    var phonA = "";
-    var url = "www.speech.cs.cmu.edu/cgi-bin/cmudict?in=";
-    var re = /<tt>.*<\\tt><\/div>/;
-    var iwords = input.split(" ");
+    var phonA = [];
+    var dict = readFile().split("\n");
+    var alphabetIndicies = [A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
+                            K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
+                            T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,}:133906];
+    var iwords = (input.split(" ")).toUpperCase();
     for (var i = 0, len = iwords.length; i < len; i++)
     {
         var w = iwords[i];
-        var request = makeHttpObject();
-        request.open("GET", url+w, true);
-        request.send(null);
-        request.onreadystatechange = function() {
-          if (request.readyState == 4)
-            document.getElementById("data").innerHTML = request.responseText;
-        };
-        var out = re.exec(document.getElementById("data").innerHTML);
-        console.log(out);
-        var final = out.substring(4,out.length-14);
-        phonA+=final;
+        var re = new RegExp("^"+w+" ", "g");
+        for(var j = alphabetIndicies[w[0]]; j<alphabetIndicies[nextLetter(w[0])]; j++)
+        {
+            var wordline = dict[j];
+            if(wordline.match(re))
+            {
+                phonA.append(wordline.replace(re,""))
+                break;
+            }
+        }
+        phonA.append(" ");
     }
     return phonA;
 }
@@ -190,8 +220,8 @@ function transform(phonA)
     //ARPABET and IPA phonemes
     var arpCons = ["P","B","EM","T","D","EN","CH","DH","DX","EL","EN","F","G","H","JH","K","L","M","N","NG","NX","Q","R","S","SH","T","TH","V","w","WH","Y","Z","ZH"];
     var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
-    var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
-    var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
+    var arpVow = ["AA","AE","AH","AO","AW","AX","AXR","AY","EH","ER","EY","IH","IX","IY","OW","OY","UH","UW","UX"," "];
+    var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ","ə", "ɚ",  "aɪ", "ɛ", "ɝ","eɪ","ɪ", "ɨ", "i", "oʊ","ɔɪ","ʊ", "u", "ʉ", " "];
 
     var out = "";
     for(var i = 0; i<phonA.length; i++)
