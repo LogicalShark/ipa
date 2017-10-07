@@ -183,15 +183,15 @@ function transform(phonA)
     var out = "";
     for(var i = 0; i<phonA.length; i++)
     {
-        console.log(el);
         var el = phonA[i];
+        if(el.length==3)
+            el = el.substr(0,2);
         if(arpCons.includes(el))
             out += ipaCons[arpCons.indexOf(el)];
         else if(arpVow.includes(el))
             out += ipaVow[arpVow.indexOf(el)];
         else
             out+=el;
-        console.log(out);
     }
     return out;
 }
@@ -215,6 +215,7 @@ function generate()
     console.log(phonI);
     //Generate output
     var t = createTable(phonI, order);
+    console.log(t);
     var out = createText(' ', length, t, order);
     document.getElementById("output").innerHTML = out;
     console.log(out);
