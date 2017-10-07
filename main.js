@@ -60,20 +60,36 @@ function createNextChars(array)
         rand -= weight;
     }
 }
+function makeHttpObject() {
+  try {return new XMLHttpRequest();}
+  catch (error) {}
+  try {return new ActiveXObject("Msxml2.XMLHTTP");}
+  catch (error) {}
+  try {return new ActiveXObject("Microsoft.XMLHTTP");}
+  catch (error) {}
+
+  throw new Error("Could not create HTTP request object.");
+}
 function getPhonemes(i)
 {
     //Ensure correct format, remove punctuation
     input = i.replace(/\n/g, '');
 
-    var phonA = ""
+    var phonA = "";
+    var url = "http://www.speech.cs.cmu.edu/cgi-bin/cmudict?in=";
     var re = /<tt>.*<\\tt><\/div>/;
     var iwords = input.split(" ");
     for (var i = 0, len = iwords.length; i < len; i++)
     {
         var w = iwords[i];
-        //do xhhtp request stuff
-        // $("#data").load("http://www.speech.cs.cmu.edu/cgi-bin/cmudict?in="+w);
-        var out = re.exec(document.getElementyById("data").value);
+        var request = makeHttpObject();
+        request.open("GET", url+w, true);
+        request.send(null);
+        request.onreadystatechange = function() {
+          if (request.readyState == 4)
+            document.getElementById("data").innerHTML = request.responseText;
+        };
+        var out = re.exec(document.getElementyById("data").innerHTML);
         console.log(out);
         var final = out.substring(4,out.length-14);
         phonA+=final;
@@ -88,9 +104,9 @@ function generate()
     //79e16dba710549c398ebc4bec069d0dd
 
     //Read inputs
-    var input = document.getElementyById("input").value();
-    var length = document.getElementyById("length").value();
-    var order = document.getElementyById("order").value();
+    var input = (document.getElementyById("input")).value();
+    var length = (document.getElementyById("length")).value();
+    var order = (document.getElementyById("order")).value();
     //Get phonemes
     var phonA = getPhonemes(input);            
     //Translate to IPA
