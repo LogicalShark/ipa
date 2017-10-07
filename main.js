@@ -91,7 +91,7 @@ function getPhonemes(i)
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
                             K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
                             T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,z:133906};
-    var iwords = (input.split(" ")).toUpperCase();
+    var iwords = input.split(" ");
     for (var i = 0, len = iwords.length; i < len; i++)
     {
         var w = iwords[i];
@@ -111,13 +111,9 @@ function getPhonemes(i)
 }
 function generate() 
 {
-    //API Keys
-    //(top tier security 👌)
-    //103869fa
-    //79e16dba710549c398ebc4bec069d0dd
-
     //Read inputs
     var input = (document.getElementById("input")).value;
+    input = input.toUpperCase();
     var length = (document.getElementById("length")).value;
     var order = (document.getElementById("order")).value;
     //Get phonemes
@@ -223,6 +219,15 @@ function transform(phonA)
 
 function readFile()
 {
+    return document.getElementById("data").innerHTML;
+}
+
+
+
+    //API Keys
+    //(top tier security 👌)
+    //103869fa
+    //79e16dba710549c398ebc4bec069d0dd
 /*    var rawFile = new XMLHttpRequest();
     rawFile.open("GET", "cmudict.txt", false);
     rawFile.onreadystatechange = function ()
@@ -237,5 +242,3 @@ function readFile()
         }
     }
     rawFile.send(null);*/
-    return document.getElementById("data").innerHTML;
-}
