@@ -76,7 +76,7 @@ function getPhonemes(i)
     input = i.replace(/\n/g, '');
 
     var phonA = "";
-    var url = "https://www.speech.cs.cmu.edu/cgi-bin/cmudict?in=";
+    var url = "www.speech.cs.cmu.edu/cgi-bin/cmudict?in=";
     var re = /<tt>.*<\\tt><\/div>/;
     var iwords = input.split(" ");
     for (var i = 0, len = iwords.length; i < len; i++)
