@@ -101,11 +101,11 @@ function getPhonemes(i)
             var wordline = dict[j];
             if(wordline.match(re))
             {
-                phonA.append(wordline.replace(re,""))
+                phonA.push(wordline.replace(re,""))
                 break;
             }
         }
-        phonA.append(" ");
+        phonA.push(" ");
     }
     return phonA;
 }
@@ -140,7 +140,7 @@ function getAudioFiles(out)
         var c = out[j];
         if((len - j)==1)
         {
-            audios.append(c);
+            audios.push(c);
             j+=1;
             continue;
         }
@@ -150,12 +150,12 @@ function getAudioFiles(out)
         {
             if(getAFile(c2))
             {
-                audios.append(c2);
+                audios.push(c2);
                 j+=2;
             }
             else
             {
-                audios.append(c);
+                audios.push(c);
                 j+=1;
             }
             continue;
@@ -164,17 +164,17 @@ function getAudioFiles(out)
         var c3 = c2 + out[j+2];
         if(hasAFile(c3))
         {
-            audios.append(c3);
+            audios.push(c3);
             j+=3;
         }
         else if(getAFile(c2))
         {
-            audios.append(c2);
+            audios.push(c2);
             j+=2;
         }
         else
         {
-            audios.append(c);
+            audios.push(c);
             j+=1;
         }
     }
