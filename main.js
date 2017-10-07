@@ -1,7 +1,7 @@
 //Markov chains
 function createTable(input, order=4) 
 {
-    var table = [];
+    var table = {};
     //Make the index table
     for (var i = 0; i<input.length; i++)
     {
