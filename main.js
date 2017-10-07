@@ -104,9 +104,9 @@ function generate()
     //79e16dba710549c398ebc4bec069d0dd
 
     //Read inputs
-    var input = (document.getElementById("input")).value();
-    var length = (document.getElementById("length")).value();
-    var order = (document.getElementById("order")).value();
+    var input = (document.getElementById("input")).value;
+    var length = (document.getElementById("length")).value;
+    var order = (document.getElementById("order")).value;
     //Get phonemes
     var phonA = getPhonemes(input);            
     //Translate to IPA
