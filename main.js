@@ -107,10 +107,15 @@ function generate()
     var length = (document.getElementById("length")).value;
     var order = (document.getElementById("order")).value;
     //Get phonemes
-    var phonA = getPhonemes(input);            
-    console.log(phonA);
+    var phonA = getPhonemes(input);
+    var flattened = []
+    for(var n = 0; n<phonA.length; n++)
+    {
+        var phons = phonA[n].split(" ");
+        flattened = flattened.concat(phons);
+    }
     //Translate to IPA
-    var phonI = transform(phonA);
+    var phonI = transform(flattened);
     console.log(phonI);
     //Generate output
     var t = createTable(phonI, order);
