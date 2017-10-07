@@ -144,6 +144,7 @@ function generate()
     //Generate output
     var t = createTable(phonI, order);
     var out = createText(' ', length, t, order);
+    document.getElementById("output").innerHTML = out;
     console.log(out);
     //Get audio files
     var audios = getAudioFiles(out);
