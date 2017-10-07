@@ -121,13 +121,13 @@ function generate()
 }
 function getAudioFiles(out)
 {
-    audios = []
+    audios = [];
     var j = 0;
     var len = out.length;
     while(j<len)
     {
         //1 char left
-        var c = out[j]
+        var c = out[j];
         if((len - j)==1)
         {
             audios.append(c);
@@ -154,7 +154,7 @@ function getAudioFiles(out)
         var c3 = c2 + out[j+2];
         if(hasAFile(c3))
         {
-            audios.append(c3)
+            audios.append(c3);
             j+=3;
         }
         else if(getAFile(c2))
@@ -182,7 +182,7 @@ function hasAFile(chars)
 {
     var audioFiles = []
     if(audioFiles.includes(chars))
-        return true
+        return true;
     return false;
 }
 function transform(phonA)
@@ -193,7 +193,7 @@ function transform(phonA)
     var arpVow = ["AA", "AE", "AH", "AO", "AW", "AX", "AXR", "AY", "EH", "ER", "EY", "IH", "IX", "IY", "OW", "OY", "UH", "UW", "UX"];
     var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ", "ə", "ɚ", "aɪ", "ɛ", "ɝ", "eɪ", "ɪ", "ɨ", "i", "oʊ", "ɔɪ", "ʊ", "u", "ʉ"];
 
-    var out = ""
+    var out = "";
     for(var i = 0; i<phonA.length; i++)
     {
         var el = phonA[i];
