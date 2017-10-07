@@ -60,16 +60,6 @@ function createNextChars(array)
         rand -= weight;
     }
 }
-/*function makeHttpObject() {
-  try {return new XMLHttpRequest();}
-  catch (error) {}
-  try {return new ActiveXObject("Msxml2.XMLHTTP");}
-  catch (error) {}
-  try {return new ActiveXObject("Microsoft.XMLHTTP");}
-  catch (error) {}
-
-  throw new Error("Could not create HTTP request object.");
-}*/
 function nextLetter(s)
 {
     return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
@@ -242,3 +232,13 @@ function readFile()
         }
     }
     rawFile.send(null);*/
+/*function makeHttpObject() {
+  try {return new XMLHttpRequest();}
+  catch (error) {}
+  try {return new ActiveXObject("Msxml2.XMLHTTP");}
+  catch (error) {}
+  try {return new ActiveXObject("Microsoft.XMLHTTP");}
+  catch (error) {}
+
+  throw new Error("Could not create HTTP request object.");
+}*/
