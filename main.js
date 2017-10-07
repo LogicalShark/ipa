@@ -117,7 +117,7 @@ function generate()
     console.log(out);
     //Get audio files
     var audios = getAudioFiles(out);
-    playAudio(audios);
+    // playAudio(audios);
 }
 function getAudioFiles(out)
 {
