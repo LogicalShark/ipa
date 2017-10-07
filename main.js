@@ -13,10 +13,7 @@ function createTable(input, order=4)
     {
         var index = input.substr(j, order);
         var next = input.substr(j+order, order);
-        if(table[index][next]!=undefined)
-            table[index][next]++;
-        else
-            table[index][next] = 1;
+        table[index][next] += 1;
     }
     return table;
 }
