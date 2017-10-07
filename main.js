@@ -70,23 +70,6 @@ function createNextChars(array)
 
   throw new Error("Could not create HTTP request object.");
 }*/
-function readFile()
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", "cmudict.txt", false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                return allText;
-            }
-        }
-    }
-    rawFile.send(null);
-}
 function nextLetter(s)
 {
     return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
@@ -236,4 +219,23 @@ function transform(phonA)
             out+=el;
     }
     return out;
+}
+
+function readFile()
+{
+/*    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", "cmudict.txt", false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                return allText;
+            }
+        }
+    }
+    rawFile.send(null);*/
+    return document.getElementById("data").innerHTML;
 }
