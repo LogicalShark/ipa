@@ -2,13 +2,13 @@ function createTable(input, order=4)
 {
     var table = [];
     //Make the index table
-    for (var i = 0; i<len(input); i++)
+    for (var i = 0; i<input.length; i++)
     {
         var sub = input.substr(i, order);
         table[sub] = [];
     }              
     //Count the following strings for each string
-    for (var j = 0; j<(len(input) - order); j++) 
+    for (var j = 0; j<(input.length - order); j++) 
     {
         var index = input.substr(j, order);
         var next = input.substr(j+order, order);
