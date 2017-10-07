@@ -37,7 +37,7 @@ function createText(first=' ', length=2000, table, order=4)
         } 
         else 
         {       
-            chars = table[Math.floor(Math.random()*items.length)];
+            chars = table[Math.floor(Math.random()*table.length)];
         }
     }
     return output;
@@ -231,4 +231,4 @@ function readFile()
             }
         }
     }
-    rawFile.send(null);*/
+    rawFile.send(null
