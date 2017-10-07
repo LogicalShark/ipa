@@ -1,3 +1,4 @@
+//Markov chains
 function createTable(input, order=4) 
 {
     var table = [];
@@ -60,6 +61,8 @@ function createNextChars(array)
         rand -= weight;
     }
 }
+
+//Get pronunciation data
 function nextLetter(s)
 {
     return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
@@ -77,7 +80,7 @@ function getPhonemes(i)
     input = i.replace(/\n/g, '');
 
     var phonA = [];
-    var dict = readFile().split("\n");
+    var dict = (document.getElementById("data").innerHTML).split("\n");
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
                             K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
                             T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,z:133906};
@@ -99,33 +102,8 @@ function getPhonemes(i)
     }
     return phonA;
 }
-function generate() 
-{
-    //Read inputs
-    var input = (document.getElementById("input")).value;
-    input = input.toUpperCase();
-    var length = (document.getElementById("length")).value;
-    var order = (document.getElementById("order")).value;
-    //Get phonemes
-    var phonA = getPhonemes(input);
-    var flattened = []
-    for(var n = 0; n<phonA.length; n++)
-    {
-        var phons = phonA[n].split(" ");
-        flattened = flattened.concat(phons);
-    }
-    //Translate to IPA
-    var phonI = transform(flattened);
-    console.log(phonI);
-    //Generate output
-    var t = createTable(phonI, order);
-    var out = createText(' ', length, t, order);
-    document.getElementById("output").innerHTML = out;
-    console.log(out);
-    //Get audio files
-    var audios = getAudioFiles(out);
-    // playAudio(audios);
-}
+
+//Get/play audio
 function getAudioFiles(out)
 {
     audios = [];
@@ -192,6 +170,8 @@ function hasAFile(chars)
         return true;
     return false;
 }
+
+//Main functions
 function transform(phonA)
 {
     //ARPABET and IPA phonemes
@@ -215,8 +195,30 @@ function transform(phonA)
     }
     return out;
 }
-
-function readFile()
+function generate() 
 {
-    return document.getElementById("data").innerHTML;
+    //Read inputs
+    var input = (document.getElementById("input")).value;
+    input = input.toUpperCase();
+    var length = (document.getElementById("length")).value;
+    var order = (document.getElementById("order")).value;
+    //Get phonemes
+    var phonA = getPhonemes(input);
+    var flattened = []
+    for(var n = 0; n<phonA.length; n++)
+    {
+        var phons = phonA[n].split(" ");
+        flattened = flattened.concat(phons);
+    }
+    //Translate to IPA
+    var phonI = transform(flattened);
+    console.log(phonI);
+    //Generate output
+    var t = createTable(phonI, order);
+    var out = createText(' ', length, t, order);
+    document.getElementById("output").innerHTML = out;
+    console.log(out);
+    //Get audio files
+    var audios = getAudioFiles(out);
+    // playAudio(audios);
 }
