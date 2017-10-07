@@ -211,24 +211,3 @@ function readFile()
 {
     return document.getElementById("data").innerHTML;
 }
-
-
-
-    //API Keys
-    //(top tier security 👌)
-    //103869fa
-    //79e16dba710549c398ebc4bec069d0dd
-/*    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", "cmudict.txt", false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                var allText = rawFile.responseText;
-                return allText;
-            }
-        }
-    }
-    rawFile.send(null
