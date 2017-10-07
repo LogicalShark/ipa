@@ -198,6 +198,7 @@ function transform(phonA)
     var out = "";
     for(var i = 0; i<phonA.length; i++)
     {
+        console.log(el);
         var el = phonA[i];
         if(arpCons.includes(el))
             out += ipaCons[arpCons.indexOf(el)];
@@ -205,6 +206,7 @@ function transform(phonA)
             out += ipaVow[arpVow.indexOf(el)];
         else
             out+=el;
+        console.log(out);
     }
     return out;
 }
