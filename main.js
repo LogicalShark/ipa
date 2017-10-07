@@ -197,10 +197,10 @@ function transform(phonA)
     for(var i = 0; i<phonA.length; i++)
     {
         var el = phonA[i];
-        if(arpaCons.includes(el))
-            out += ipaCons[arpaCons.indexOf(el)];
-        else if(arpaVow.includes(el))
-            out += ipaVow[arpaVow.indexOf(el)];
+        if(arpCons.includes(el))
+            out += ipaCons[arpCons.indexOf(el)];
+        else if(arpVow.includes(el))
+            out += ipaVow[arpVow.indexOf(el)];
         else
             out+=el;
     }
