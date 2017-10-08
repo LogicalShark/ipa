@@ -9,6 +9,7 @@ function createTable(input, order)
     {
         var sub = input.substr(i, order);
         table[sub] = {};
+        table[sub]["SIZE"] = 1;
         size++;
     }
     //Count the following strings for each string
@@ -20,7 +21,7 @@ function createTable(input, order)
         if(table[index][next]==undefined && next.length>0)
         {
             table[index][next] = 1;
-            table[index]["SIZE"] = 1;
+            table[index]["SIZE"] += 1;
         }
         else
         {
@@ -73,9 +74,13 @@ function createNextChars(array)
         if(k!="SIZE")
         {
             var weight = array[k];
+            console.log(weight);
             if (rand <= weight)
+            {
+                console.log(k);
                 return k;
-            rand -= weight;            
+            }
+            rand -= weight;       
         }
     }
 }
