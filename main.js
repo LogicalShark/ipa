@@ -15,8 +15,8 @@ function createTable(input, order)
     for (var j = 0; j<(input.length - order - order); j++) 
     {
         var index = input.substr(j, order);
-        var k = j+order
-        var next = input.substr(K, order);
+        var k = j+order+0
+        var next = input.substr(k, order);
         if(table[index][next]==undefined && next.length>0)
         {
             console.log("initial");
