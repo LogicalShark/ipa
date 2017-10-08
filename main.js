@@ -32,10 +32,11 @@ function createTable(input, order)
 }
 function createText(first, length, table, order, size) 
 {
+    var keys = Object.keys(table);
     var chars = first;
     if(first ==' ')
     {
-        chars = table[Math.floor(Math.random()*size)];
+        chars = table[keys[Math.floor(Math.random()*size)]];
     }
     var output = chars;
     for (var k = 0; k<(length/order); k++) 
@@ -51,7 +52,7 @@ function createText(first, length, table, order, size)
         }
         else 
         {       
-            chars = table[Math.floor(Math.random()*size)];
+            chars = table[keys[Math.floor(Math.random()*size)]];
         }
     }
     return output;
