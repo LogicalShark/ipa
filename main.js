@@ -43,13 +43,10 @@ function createText(first, length, table, order, size)
     for (var k = 0; k<(length/order); k++) 
     {
         newchars = createNextChars(table[chars]);
-        console.log(chars);
-        console.log(newchars);
         if(newchars!=undefined && newchars.length>0)
         {
             chars = newchars;
             output += newchars;
-            console.log(output);
         }
         else 
         {       
@@ -74,10 +71,8 @@ function createNextChars(array)
         if(k!="SIZE")
         {
             var weight = array[k];
-            console.log(weight);
             if (rand <= weight)
             {
-                console.log(k);
                 return k;
             }
             rand -= weight;       
@@ -243,7 +238,7 @@ function generate()
     for(var n = 0; n<phonA.length; n++)
     {
         var phons = phonA[n].split(" ");
-        flattened = flattened.concat(phons);
+        flattened = flattened.concat(phons).concat(" ");
     }
     //Translate to IPA
     var phonI = transform(flattened);
