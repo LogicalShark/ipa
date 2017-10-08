@@ -220,8 +220,8 @@ function transform(phonA)
             out += ipaCons[arpCons.indexOf(el)];
         else if(arpVow.includes(el))
             out += ipaVow[arpVow.indexOf(el)];
-        else
-            out+=el;
+        // else
+            // out+=el;
     }
     return out;
 }
