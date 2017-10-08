@@ -57,6 +57,8 @@ function sum(a,b)
 }
 function createNextChars(array)
 {
+    if(array==undefined)
+        return "";
     if(array["SIZE"]==undefined)
         return "";
     var rand  = Math.floor(Math.random() * (array["SIZE"] - 1));
@@ -238,6 +240,6 @@ function generate()
     document.getElementById("output").innerHTML = out;
     console.log(out);
     //Get audio files
-    var audios = getAudioFiles(out);
+    // var audios = getAudioFiles(out);
     // playAudio(audios);
 }
