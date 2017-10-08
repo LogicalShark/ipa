@@ -68,12 +68,15 @@ function createNextChars(array)
     if(array["SIZE"]==undefined)
         return "";
     var rand  = Math.floor(Math.random() * (array["SIZE"] - 1));
-    for (var k in array) 
+    for (var k in array)
     {
-        var weight = array[k];
-        if (rand <= weight)
-            return item;
-        rand -= weight;
+        if(k!="SIZE")
+        {
+            var weight = array[k];
+            if (rand <= weight)
+                return k;
+            rand -= weight;            
+        }
     }
 }
 
