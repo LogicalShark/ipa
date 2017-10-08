@@ -19,7 +19,6 @@ function createTable(input, order)
         var next = input.substr(k, order);
         if(table[index][next]==undefined && next.length>0)
         {
-            console.log("initial");
             table[index][next] = 1;
             table[index]["SIZE"] = 1;
         }
@@ -42,11 +41,14 @@ function createText(first, length, table, order, size)
     for (var k = 0; k<(length/order); k++) 
     {
         newchars = createNextChars(table[chars]);
+        console.log(chars);
+        console.log(newchars);
         if(newchars!=undefined && newchars.length>0)
         {
             chars = newchars;
             output += newchars;
-        } 
+            console.log(output);
+        }
         else 
         {       
             chars = table[Math.floor(Math.random()*size)];
@@ -208,7 +210,6 @@ function transform(phonA)
             el = el.substr(0,2);
         if(el=="")
             continue;
-        console.log(el);
         if(arpCons.includes(el))
             out += ipaCons[arpCons.indexOf(el)];
         else if(arpVow.includes(el))
@@ -237,7 +238,6 @@ function generate()
     }
     //Translate to IPA
     var phonI = transform(flattened);
-    console.log(phonI);
     //Generate output
     var t = createTable(phonI, order);
     console.log(t);
