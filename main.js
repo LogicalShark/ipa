@@ -15,9 +15,9 @@ function createTable(input, order)
     {
         var index = input.substr(j, order);
         var next = input.substr(j+order, order);
-        // console.log(index);
-        // console.log(next);
-        if(table[index][next]==undefined)
+        console.log(index);
+        console.log(next);
+        if(table[index][next]==undefined && next.length>0)
         {
             console.log("initial");
             console.log(next);
@@ -26,8 +26,6 @@ function createTable(input, order)
         }
         else
         {
-            console.log("additional");
-            console.log(next);
             table[index][next] += 1;
             table[index]["SIZE"] += 1;
         }
