@@ -37,7 +37,7 @@ function createText(first, length, table, order, size)
     var chars = first;
     if(first ==' ')
     {
-        chars = table[keys[Math.floor(Math.random()*size)]];
+        chars = createNextChars(table[keys[Math.floor(Math.random()*size)]]);
     }
     var output = chars;
     for (var k = 0; k<(length/order); k++) 
