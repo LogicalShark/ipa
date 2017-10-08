@@ -11,12 +11,12 @@ function createTable(input, order)
         size++;
     }
     //Count the following strings for each string
-    for (var j = 0; j<(input.length - order); j++) 
+    for (var j = 0; j<(input.length - order - order); j++) 
     {
         var index = input.substr(j, order);
         var next = input.substr(j+order, order);
-        console.log(index);
-        console.log(next);
+        // console.log(index);
+        // console.log(next);
         if(table[index][next]==undefined)
         {
             console.log("initial");
