@@ -1,44 +1,52 @@
 //Markov chains
-function createTable(input, order=4) 
+function createTable(input, order) 
 {
-    var table = [];
+    var table = {};
+    var size = 0;
     //Make the index table
-    for (var i = 0; i<input.length; i++)
+    for (var i = 0; i<(input.length - order); i++)
     {
         var sub = input.substr(i, order);
         table[sub] = {};
-    }              
+        size++;
+    }
     //Count the following strings for each string
     for (var j = 0; j<(input.length - order); j++) 
     {
         var index = input.substr(j, order);
         var next = input.substr(j+order, order);
         if(table[index][next]==undefined)
+        {
             table[index][next] = 1;
+            table[index]["SIZE"] = 1;
+        }
         else
+        {
             table[index][next] += 1;
+            table[index]["SIZE"] += 1;
+        }
     }
-    return table;
+    return (table,size);
 }
-function createText(first=' ', length=2000, table, order=4) 
+function createText(first, length, table, order, size) 
 {
     var chars = first;
     if(first ==' ')
     {
-        chars = table[Math.floor(Math.random()*table.length)];
+        chars = table[Math.floor(Math.random()*size)];
     }
     var output = chars;
     for (var k = 0; k<(length/order); k++) 
     {
         newchars = createNextChars(table[chars]);
-        if(newchars != null)
+        if(newchars!=undefined && newchars.length>0)
         {
             chars = newchars;
             output += newchars;
         } 
         else 
         {       
-            chars = table[Math.floor(Math.random()*table.length)];
+            chars = table[Math.floor(Math.random()*size)];
         }
     }
     return output;
@@ -47,15 +55,14 @@ function sum(a,b)
 {
     return a+b;
 }
-function createNextChars(array) 
+function createNextChars(array)
 {
-    if(array==undefined)
-        return null;
-    var total = total.reduce(sum);
-    var rand  = Math.floor(Math.random() * (total - 1)) + 1;
-    for (var l = 0; l<array.length; l++) 
+    if(array["SIZE"]==undefined)
+        return "";
+    var rand  = Math.floor(Math.random() * (array["SIZE"] - 1));
+    for (var k in array) 
     {
-        var weight = array[l];
+        var weight = array[k];
         if (rand <= weight)
             return item;
         rand -= weight;
@@ -227,7 +234,7 @@ function generate()
     //Generate output
     var t = createTable(phonI, order);
     console.log(t);
-    var out = createText(' ', length, t, order);
+    var out = createText(' ', length, t[0], order, t[1]);
     document.getElementById("output").innerHTML = out;
     console.log(out);
     //Get audio files
