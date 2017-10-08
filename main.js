@@ -1,6 +1,7 @@
 //Markov chains
 function createTable(input, order) 
 {
+    order = parseInt(order);
     var table = {};
     var size = 0;
     //Make the index table
@@ -14,17 +15,11 @@ function createTable(input, order)
     for (var j = 0; j<(input.length - order - order); j++) 
     {
         var index = input.substr(j, order);
-        console.log(j);
-        console.log(order);
         var k = j+order
-        console.log(k);
-        var next = input.substr(k, order);
-        console.log(index);
-        console.log(next);
+        var next = input.substr(K, order);
         if(table[index][next]==undefined && next.length>0)
         {
             console.log("initial");
-            console.log(next);
             table[index][next] = 1;
             table[index]["SIZE"] = 1;
         }
