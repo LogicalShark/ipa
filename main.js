@@ -53,7 +53,7 @@ function createText(first, length, table, order, size)
         }
         else 
         {       
-            chars = table[keys[Math.floor(Math.random()*size)]];
+            chars = createNextChars(table[keys[Math.floor(Math.random()*size)]]);
         }
     }
     return output;
