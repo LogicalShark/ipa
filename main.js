@@ -170,8 +170,14 @@ function hasAFile(chars)
         return true;
     return false;
 }
-
-//Main functions
+//ARPABET to IPA translation
+function uniques(a)
+{
+    var seen = {};
+    return a.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+}
 function transform(phonA)
 {
     //ARPABET and IPA phonemes
@@ -186,6 +192,9 @@ function transform(phonA)
         var el = phonA[i];
         if(el.length==3)
             el = el.substr(0,2);
+        if(el=="")
+            continue;
+        console.log(el);
         if(arpCons.includes(el))
             out += ipaCons[arpCons.indexOf(el)];
         else if(arpVow.includes(el))
@@ -195,6 +204,8 @@ function transform(phonA)
     }
     return out;
 }
+
+//Main function
 function generate() 
 {
     //Read inputs
