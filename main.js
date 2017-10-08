@@ -83,6 +83,8 @@ function createNextChars(array)
 //Get pronunciation data
 function nextLetter(s)
 {
+    if(s==undefined || s.length = 0)
+        return "";
     return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function(a){
         var c= a.charCodeAt(0);
         switch(c){
