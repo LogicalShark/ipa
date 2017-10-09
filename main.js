@@ -231,6 +231,26 @@ function readInputs()
     var start = (document.getElementById("start")).value;
     return [input,length,order,start];
 }
+function tryGenerate(input,data)
+{
+    if(input.split(" ").length == data.split(" ").length)
+    {
+        console.log(phonA);
+        var flattened = [];
+        for(var n = 0; n<phonA.length; n++)
+        {
+            var phons = phonA[n].split(" ");
+            flattened = flattened.concat(phons).concat(" ");
+        }
+        //Translate to IPA
+        var phonI = transform(flattened);
+        //Generate output
+        var t = createTable(phonI, order);
+        console.log(t);
+        var out = createText(start, length, t[0], order, t[1]);
+        console.log(out);
+    }
+}
 function generateIPA() 
 {
     //Read inputs
@@ -249,10 +269,6 @@ function generateIPA()
     for (var i = 0, len = iwords.length; i < len; i++)
     {
         var w = iwords[i];
-        w = w.replace(/\(/,"\\(");
-        w = w.replace(/\)/,"\\)");
-        w = w.replace(/\[/,"\\[");
-        w = w.replace(/\]/,"\\]");
         w = w+" ";
         console.log(w);
         database.ref('/ARP/'+w).once('value').then(function(snapshot) {
@@ -260,26 +276,13 @@ function generateIPA()
             {
                 var p = snapshot.val().phonemes;
                 console.log(p);
+                document.getElementById("data").value += p + " ";
+                tryGenerate(input, document.getElementById("data").value);
                 phonA.push(p);
             }
         });
-
         phonA.push(" ");
     }
-    console.log(phonA);
-    var flattened = [];
-    for(var n = 0; n<phonA.length; n++)
-    {
-        var phons = phonA[n].split(" ");
-        flattened = flattened.concat(phons).concat(" ");
-    }
-    //Translate to IPA
-    var phonI = transform(flattened);
-    //Generate output
-    var t = createTable(phonI, order);
-    console.log(t);
-    var out = createText(start, length, t[0], order, t[1]);
-    console.log(out);
 }
 function generateText()
 {
