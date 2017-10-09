@@ -125,6 +125,7 @@ function getPhonemes(i)
 
         phonA.push(" ");
     }
+    console.log(phonA);
     return phonA;
 }
 
@@ -275,7 +276,13 @@ function generateIPA()
     var start = x[3];
     //Get phonemes
     var phonA = getPhonemes(input);
-    var flattened = []
+    while(document.getElementById("data").value=="")
+    {
+
+    }
+    var phonA = document.getElementById("data").value;
+    document.getElementById("data").value = "";
+    var flattened = [];
     for(var n = 0; n<phonA.length; n++)
     {
         var phons = phonA[n].split(" ");
@@ -300,7 +307,7 @@ function generateText()
     //Generate output
     var t = createTable(input, order);
     console.log(t);
-    var out = createText(first, length, t[0], order, t[1]);
+    var out = createText(start, length, t[0], order, t[1]);
     console.log(out);
 }
 
