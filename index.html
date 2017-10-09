@@ -8,6 +8,7 @@
         input,textarea {
             background: #AA6C39;
             outline: none;
+            border: none;
         }
         #main{
             width:100%;
@@ -22,10 +23,10 @@
     <div id="main">
         <textarea rows="5" cols="50" id="input" placeholder="Input"></textarea><br/>
         <input type="text" id="length" placeholder="Length">
-        <input type="text" id="order" placeholder="Order"><br>
+        <input type="text" id="order" placeholder="Order"><br><br>
         <button onClick="generate()" style="background: #AA8439;">Generate</button>
         <div>
-            <p id="output">(Output)</p>
+            <textarea id="output" placeholder="Output" rows="10" cols="50"></textarea>
         </div>
         <!-- <button onClick="read()">Read</button> -->
     </div>
