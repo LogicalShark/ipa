@@ -286,7 +286,7 @@ function generateIPA()
     var out = createText(start, length, t[0], order, t[1]);
     console.log(out);
 }
-function generateText
+function generateText()
 {
     //Read inputs
     var x = readInputs();
