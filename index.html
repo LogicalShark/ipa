@@ -8,7 +8,7 @@
 <body>
     <h1>Pronounced English Generator</h1>
     <div>
-        <input type="textarea" id="input" placeholder="Input">
+        <textarea rows="5" cols="50" id="input" placeholder="Input">
         <input type="text" id="length" placeholder="Length">
         <input type="text" id="order" placeholder="Order">
         <button onClick="generate()">Generate</button>
@@ -17,8 +17,8 @@
     </div>
     <div>
         <h1>About</h1>
-        <p>Enter some example text for input and the preferred length of the output. Don't use punctuation or special characters or they may not be recognized. Higher order means faster and closer to the original text, lower order is slower and gives crazier results (recommended range 2 - 6).
-            <br/>Created by Marcus Alder, 2017. <br\>Uses <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronunciation Dictionary</a>. </p>
+        <p>Enter some example text for input and the preferred length of the output. Don't use punctuation or special characters or they may not be recognized. Higher order means faster and closer to the original text, lower order is slower and gives crazier results (recommended range 2 - 6). The output will be in <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>. You can read it yourself or use a tool like Amazon Polly to hear it spoken.<br/>
+        Created by Marcus Alder, 2017. <br\>Uses the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronunciation Dictionary</a>. </p>
     </div>
 </body>
 <p id="data" style="display: none;">;;; # CMUdict  --  Major Version: 0.07
@@ -89,7 +89,7 @@
 #POUND-SIGN  P AW1 N D S AY2 N
 #SHARP-SIGN  SH AA1 R P S AY2 N
 %PERCENT  P ER0 S EH1 N T
-&AMPERSAND  AE1 M P ER0 S AE2 N D
+&amp;AMPERSAND  AE1 M P ER0 S AE2 N D
 'ALLO  AA2 L OW1
 'APOSTROPHE  AH0 P AA1 S T R AH0 F IY0
 'BOUT  B AW1 T
