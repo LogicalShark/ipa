@@ -111,6 +111,7 @@ function getPhonemes(i)
         w = w.replace(/\[/,"\\[");
         w = w.replace(/\]/,"\\]");
         w = w+" ";
+        console.log(w);
         database.ref('/ARP/'+w).once('value').then(function(snapshot) {
             if(snapshot.val()!=null && snapshot.val()!=undefined)
             {
