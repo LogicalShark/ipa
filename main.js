@@ -117,10 +117,7 @@ function getPhonemes(i)
         w = w+" ";
         database.ref('/ARP/'+w).once('value').then(function(snapshot) {
             var p = snapshot.val().phonemes;
-            if(username)
-            {
-                phonA.push(p);
-            }
+            phonA.push(p);
         });
         // var re = new RegExp("^"+w+" ", "g");
         // for(var j = alphabetIndicies[w[0]]; j<alphabetIndicies[nextLetter(w[0])]; j++)
