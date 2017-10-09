@@ -252,7 +252,7 @@ function generate()
     var t = createTable(phonI, order);
     console.log(t);
     var out = createText(' ', length, t[0], order, t[1]);
-    document.getElementById("output").innerHTML = out;
+    document.getElementById("output").value = out;
     console.log(out);
     //Get audio files
     // var audios = getAudioFiles(out);
