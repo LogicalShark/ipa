@@ -233,8 +233,8 @@ function readInputs()
 }
 function tryGenerate(input,data)
 {
-    if(input.split(" ").length == data.split(" ").length)
-    {
+    // if(input.split(" ").length <= data.split(" ").length)
+    // {
         console.log(phonA);
         var flattened = [];
         for(var n = 0; n<phonA.length; n++)
@@ -249,7 +249,7 @@ function tryGenerate(input,data)
         console.log(t);
         var out = createText(start, length, t[0], order, t[1]);
         console.log(out);
-    }
+    // }
 }
 function generateIPA() 
 {
