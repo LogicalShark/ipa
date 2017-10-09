@@ -103,10 +103,6 @@ function getPhonemes(i)
     var phonA = [];
     var iwords = input.split(" ");
 
-    var userId = firebase.auth().currentUser.uid;
-    var dict = firebase.database().ref('/ARP/' + userId).once('value').then(function(snapshot) {
-    var username = snapshot.val();
-    });
     // var dict = (document.getElementById("data").innerHTML).split("\n");
     // var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
     //                         K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
