@@ -5,18 +5,24 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="main.js"></script>
     <style type="text/css">
-        .input,.textarea {
+        input,textarea {
             background: #AA6C39;
             outline: none;
         }
+        #main{
+            width:100%;
+            padding:0px;
+            background:#2E4172;
+            color:#FFD0AA;
+        }
     </style>
 </head>
-<body style="text-align:center; background:#226666; color:white;">
+<body style="text-align:center; background:#226666;">
     <h1>Phonetic English Generator</h1>
-    <div style="width:100%; padding:0px; background:#2E4172;">
+    <div id="main">
         <textarea rows="5" cols="50" id="input" placeholder="Input"></textarea><br/>
         <input type="text" id="length" placeholder="Length">
-        <input type="text" id="order" placeholder="Order">
+        <input type="text" id="order" placeholder="Order"><br>
         <button onClick="generate()" style="background: #AA8439;">Generate</button>
         <div>
             <p id="output">(Output)</p>
