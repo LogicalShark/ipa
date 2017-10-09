@@ -230,8 +230,8 @@ function transform(phonA)
     return out;
 }
 
-//Main function
-function generate() 
+//Main functions
+function generateIPA() 
 {
     //Read inputs
     var input = (document.getElementById("input")).value;
@@ -252,9 +252,20 @@ function generate()
     var t = createTable(phonI, order);
     console.log(t);
     var out = createText(' ', length, t[0], order, t[1]);
-    document.getElementById("output").value = out;
     console.log(out);
     //Get audio files
     // var audios = getAudioFiles(out);
     // playAudio(audios);
+}
+function generateText
+{
+    //Read inputs
+    var input = (document.getElementById("input")).value;
+    var length = (document.getElementById("length")).value;
+    var order = (document.getElementById("order")).value;
+    //Generate output
+    var t = createTable(input, order);
+    console.log(t);
+    var out = createText(' ', length, t[0], order, t[1]);
+    console.log(out);
 }
