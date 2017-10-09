@@ -112,8 +112,11 @@ function getPhonemes(i)
         w = w.replace(/\]/,"\\]");
         w = w+" ";
         database.ref('/ARP/'+w).once('value').then(function(snapshot) {
-            var p = snapshot.val().phonemes;
-            phonA.push(p);
+            if(snapshot.val()!=null && snapshot.val()!=undefined)
+            {
+                var p = snapshot.val().phonemes;
+                phonA.push(p);
+            }
         });
 
         phonA.push(" ");
