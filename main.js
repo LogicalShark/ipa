@@ -108,8 +108,10 @@ function getPhonemes(i)
     for (var i = 0, len = iwords.length; i < len; i++)
     {
         var w = iwords[i];
-        w.replace(/\(/,"\\(");
-        w.replace(/\)/,"\\)");
+        w = w.replace(/\(/,"\\(");
+        w = w.replace(/\)/,"\\)");
+        w = w.replace(/\[/,"\\[");
+        w = w.replace(/\]/,"\\]");
         var re = new RegExp("^"+w+" ", "g");
         for(var j = alphabetIndicies[w[0]]; j<alphabetIndicies[nextLetter(w[0])]; j++)
         {
