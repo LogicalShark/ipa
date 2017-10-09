@@ -99,6 +99,7 @@ function getPhonemes(i)
     //Ensure correct format, remove punctuation
     input = i.replace(/\n/g, '');
     input = i.replace(/\*/g, '');
+    document.getElementById("data").value = "";
 
     var phonA = [];
     var iwords = input.split(" ");
@@ -116,7 +117,9 @@ function getPhonemes(i)
             if(snapshot.val()!=null && snapshot.val()!=undefined)
             {
                 var p = snapshot.val().phonemes;
+                console.log(p);
                 phonA.push(p);
+                document.getElementById("data").value += p;
             }
         });
 
