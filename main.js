@@ -35,7 +35,7 @@ function createText(first, length, table, order, size)
 {
     var keys = Object.keys(table);
     var chars = first;
-    if(first =="")
+    if(first =="" || table.first == undefined)
     {
         chars = createNextChars(table[keys[Math.floor(Math.random()*size)]]);
     }
@@ -231,22 +231,26 @@ function transform(phonA)
 }
 
 //Main functions
-/*function readInputs()
+function readInputs()
 {
     var input = (document.getElementById("input")).value;
     var length = (document.getElementById("length")).value;
+    if(length == "")
+        length = 1000;
     var order = (document.getElementById("order")).value;
+    if(order == "")
+        order = 4;
     var start = (document.getElementById("start")).value;
     return [input,length,order,start];
-}*/
+}
 function generateIPA() 
 {
     //Read inputs
-    var input = (document.getElementById("input")).value;
-    input = input.toUpperCase();
-    var length = (document.getElementById("length")).value;
-    var order = (document.getElementById("order")).value;
-    var start = (document.getElementById("start")).value;
+    var x = readInputs();
+    var input = x[0].toUpperCase();
+    var length = x[1];
+    var order = x[2].value;
+    var start = x[3];
     //Get phonemes
     var phonA = getPhonemes(input);
     var flattened = []
@@ -262,17 +266,15 @@ function generateIPA()
     console.log(t);
     var out = createText(start, length, t[0], order, t[1]);
     console.log(out);
-    //Get audio files
-    // var audios = getAudioFiles(out);
-    // playAudio(audios);
 }
 function generateText
 {
     //Read inputs
-    var input = (document.getElementById("input")).value;
-    var length = (document.getElementById("length")).value;
-    var order = (document.getElementById("order")).value;
-    var start = (document.getElementById("start")).value;
+    var x = readInputs();
+    var input = x[0];
+    var length = x[1];
+    var order = x[2].value;
+    var start = x[3];
     //Generate output
     var t = createTable(input, order);
     console.log(t);
