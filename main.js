@@ -35,7 +35,7 @@ function createText(first, length, table, order, size)
 {
     var keys = Object.keys(table);
     var chars = first;
-    if(first ==' ')
+    if(first =="")
     {
         chars = createNextChars(table[keys[Math.floor(Math.random()*size)]]);
     }
@@ -231,6 +231,14 @@ function transform(phonA)
 }
 
 //Main functions
+/*function readInputs()
+{
+    var input = (document.getElementById("input")).value;
+    var length = (document.getElementById("length")).value;
+    var order = (document.getElementById("order")).value;
+    var start = (document.getElementById("start")).value;
+    return [input,length,order,start];
+}*/
 function generateIPA() 
 {
     //Read inputs
@@ -238,6 +246,7 @@ function generateIPA()
     input = input.toUpperCase();
     var length = (document.getElementById("length")).value;
     var order = (document.getElementById("order")).value;
+    var start = (document.getElementById("start")).value;
     //Get phonemes
     var phonA = getPhonemes(input);
     var flattened = []
@@ -251,7 +260,7 @@ function generateIPA()
     //Generate output
     var t = createTable(phonI, order);
     console.log(t);
-    var out = createText(' ', length, t[0], order, t[1]);
+    var out = createText(start, length, t[0], order, t[1]);
     console.log(out);
     //Get audio files
     // var audios = getAudioFiles(out);
@@ -263,9 +272,10 @@ function generateText
     var input = (document.getElementById("input")).value;
     var length = (document.getElementById("length")).value;
     var order = (document.getElementById("order")).value;
+    var start = (document.getElementById("start")).value;
     //Generate output
     var t = createTable(input, order);
     console.log(t);
-    var out = createText(' ', length, t[0], order, t[1]);
+    var out = createText(first, length, t[0], order, t[1]);
     console.log(out);
 }
