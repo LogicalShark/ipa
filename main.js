@@ -94,40 +94,6 @@ function nextLetter(s)
         }
     });
 }
-function getPhonemes(i)
-{
-    //Ensure correct format, remove punctuation
-    input = i.replace(/\n/g, '');
-    input = i.replace(/\*/g, '');
-    document.getElementById("data").value = "";
-
-    var phonA = [];
-    var iwords = input.split(" ");
-    var database = firebase.database();
-    for (var i = 0, len = iwords.length; i < len; i++)
-    {
-        var w = iwords[i];
-        w = w.replace(/\(/,"\\(");
-        w = w.replace(/\)/,"\\)");
-        w = w.replace(/\[/,"\\[");
-        w = w.replace(/\]/,"\\]");
-        w = w+" ";
-        console.log(w);
-        database.ref('/ARP/'+w).once('value').then(function(snapshot) {
-            if(snapshot.val()!=null && snapshot.val()!=undefined)
-            {
-                var p = snapshot.val().phonemes;
-                console.log(p);
-                phonA.push(p);
-                document.getElementById("data").value += p;
-            }
-        });
-
-        phonA.push(" ");
-    }
-    console.log(phonA);
-    return phonA;
-}
 
 //Get/play audio
 function getAudioFiles(out)
@@ -275,14 +241,32 @@ function generateIPA()
     var length = x[1];
     var order = x[2].value;
     var start = x[3];
-    //Get phonemes
-    var phonA = getPhonemes(input);
-    while(document.getElementById("data").value=="")
-    {
-
-    }
-    var phonA = document.getElementById("data").value;
+    //Get phoneme data
     document.getElementById("data").value = "";
+    var phonA = [];
+    var iwords = input.split(" ");
+    var database = firebase.database();
+    for (var i = 0, len = iwords.length; i < len; i++)
+    {
+        var w = iwords[i];
+        w = w.replace(/\(/,"\\(");
+        w = w.replace(/\)/,"\\)");
+        w = w.replace(/\[/,"\\[");
+        w = w.replace(/\]/,"\\]");
+        w = w+" ";
+        console.log(w);
+        database.ref('/ARP/'+w).once('value').then(function(snapshot) {
+            if(snapshot.val()!=null && snapshot.val()!=undefined)
+            {
+                var p = snapshot.val().phonemes;
+                console.log(p);
+                phonA.push(p);
+            }
+        });
+
+        phonA.push(" ");
+    }
+    console.log(phonA);
     var flattened = [];
     for(var n = 0; n<phonA.length; n++)
     {
