@@ -98,6 +98,7 @@ function getPhonemes(i)
 {
     //Ensure correct format, remove punctuation
     input = i.replace(/\n/g, '');
+    input = i.replace(/\*/g, '');
 
     var phonA = [];
     var dict = (document.getElementById("data").innerHTML).split("\n");
