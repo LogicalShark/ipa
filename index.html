@@ -7,6 +7,14 @@
     <style type="text/css">
         input,textarea {
             background: #090B3B;
+            color: #545993;
+            outline: none;
+            border: none;
+            box-shadow: none;
+        }
+       input:focus,textarea:focus {
+            color: #7F81B1;
+            background: #090B3B;
             outline: none;
             border: none;
             box-shadow: none;
@@ -29,7 +37,7 @@
         <textarea rows="5" cols="50" id="input" placeholder="Input"></textarea><br/>
         <input type="text" id="length" placeholder="Length">
         <input type="text" id="order" placeholder="Order"><br><br>
-        <button onClick="generate()" style="background: #287650;">Generate</button><br>
+        <button onClick="generate()" style="background: #287650; box-shadow: none;">Generate</button><br>
         <textarea id="output" placeholder="Output" rows="10" cols="50"></textarea><br>
         <h1>About</h1>
         <p>Enter some example text for input and the preferred length of the output. Don't use punctuation or special characters or they may not be recognized. Higher order means faster and closer to the original text, lower order is slower and gives crazier results (recommended range 2 - 6). The output will be in <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>. You can read it yourself or use a tool like Amazon Polly to hear it spoken.<br/>
