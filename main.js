@@ -239,15 +239,18 @@ function writeData()
     {
         var l = dict[i];
         var re = new RegExp("^[A-Z]+ ", "g");
-        var word = l.match(re)[0];
-        var apronu = l.replace(re,"");
-        var ipronu = transform(apronu);
-        firebase.database().ref('ARP/' + word).set({
-            phonemes : apronu
-        });
-        firebase.database().ref('IPA/' + word).set({
-            phonemes : ipronu
-        });
+        if(l.match(re))
+        {
+            var word = l.match(re)[0];
+            var apronu = l.replace(re,"");
+            var ipronu = transform(apronu);
+            firebase.database().ref('ARP/' + word).set({
+                phonemes : apronu
+            });
+            firebase.database().ref('IPA/' + word).set({
+                phonemes : ipronu
+            });            
+        }
     }
 }
 function readInputs()
