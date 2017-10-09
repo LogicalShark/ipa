@@ -235,11 +235,11 @@ function tryGenerate(input,data)
 {
     // if(input.split(" ").length <= data.split(" ").length)
     // {
-        console.log(phonA);
+        console.log(data);
         var flattened = [];
-        for(var n = 0; n<phonA.length; n++)
+        for(var n = 0; n<data.length; n++)
         {
-            var phons = phonA[n].split(" ");
+            var phons = data[n].split(" ");
             flattened = flattened.concat(phons).concat(" ");
         }
         //Translate to IPA
