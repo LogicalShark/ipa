@@ -101,6 +101,7 @@ function getPhonemes(i)
     input = i.replace(/\*/g, '');
 
     var phonA = [];
+
     var dict = (document.getElementById("data").innerHTML).split("\n");
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
                             K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
@@ -210,7 +211,6 @@ function transform(phonA)
     var ipaCons = ["p","b","m̩", "t","d","n", "tʃ","ð", "ɾ", "l̩", "n̩", "f","g","h","h", "dʒ","k","l","m","n","ŋ", "ɾ̃", "ʔ","ɹ","s","ʃ", "t","θ", "v","W","ʍ", "j","z","ʒ" ];
     var arpVow = ["AA","AE","AH","AO","AW","AX","AXR","AY","EH","ER","EY","IH","IX","IY","OW","OY","UH","UW","UX"," "];
     var ipaVow = ["ɑ", "æ", "ʌ", "ɔ", "aʊ","ə", "ɚ",  "aɪ", "ɛ", "ɝ","eɪ","ɪ", "ɨ", "i", "oʊ","ɔɪ","ʊ", "u", "ʉ", " "];
-    var uniVow = [""]
 
     var out = "";
     for(var i = 0; i<phonA.length; i++)
@@ -231,6 +231,25 @@ function transform(phonA)
 }
 
 //Main functions
+function writeData()
+{
+    var database = firebase.database();
+    var dict = (document.getElementById("data").innerHTML).split("\n");
+    for (var i = 0, i < dict.length; i++)
+    {
+        var l = dict[i];
+        var re = new RegExp("^[A-Z]+ ", "g");
+        var word = l.match(re)[0];
+        var apronu = l.replace(re,"");
+        var ipronu = transform(apronu);
+        firebase.database().ref('ARP/' + word).set({
+            phonemes : apronu;
+        });
+        firebase.database().ref('IPA/' + word).set({
+            phonemes : ipronu;
+        });
+    }
+}
 function readInputs()
 {
     var input = (document.getElementById("input")).value;
