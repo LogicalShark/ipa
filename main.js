@@ -271,6 +271,7 @@ function generateIPA()
     var x = readInputs();
     var input = x[0].toUpperCase();
     input = input.replace(/[^\w\s]/g,"");
+    input = input.replace(/\n/g,"");
     var length = x[1];
     var order = x[2].value;
     var start = x[3];
