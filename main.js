@@ -235,7 +235,7 @@ function writeData()
 {
     var database = firebase.database();
     var dict = (document.getElementById("data").innerHTML).split("\n");
-    for (var i = 0, i < dict.length; i++)
+    for (var i = 0; i < dict.length; i++)
     {
         var l = dict[i];
         var re = new RegExp("^[A-Z]+ ", "g");
