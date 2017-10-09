@@ -243,10 +243,10 @@ function writeData()
         var apronu = l.replace(re,"");
         var ipronu = transform(apronu);
         firebase.database().ref('ARP/' + word).set({
-            phonemes : apronu;
+            phonemes : apronu
         });
         firebase.database().ref('IPA/' + word).set({
-            phonemes : ipronu;
+            phonemes : ipronu
         });
     }
 }
