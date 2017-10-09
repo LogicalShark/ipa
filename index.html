@@ -4,14 +4,20 @@
     <title>IPA Generator</title>
     <meta charset="utf-8">
     <script type="text/javascript" src="main.js"></script>
+    <style type="text/css">
+        .input,.textarea {
+            background: #AA6C39;
+            outline: none;
+        }
+    </style>
 </head>
-<body style="text-align:center; background:#226666">
+<body style="text-align:center; background:#226666; color:white;">
     <h1>Phonetic English Generator</h1>
-    <div style="width:100%; background:#2E4172;">
-        <textarea rows="5" cols="50" id="input" placeholder="Input" style="background: #AA6C39"></textarea><br/>
-        <input type="text" id="length" placeholder="Length" style="background: #AA6C39">
-        <input type="text" id="order" placeholder="Order" style="background: #AA6C39">
-        <button onClick="generate()" style="color: #AA8439;">Generate</button>
+    <div style="width:100%; padding:0px; background:#2E4172;">
+        <textarea rows="5" cols="50" id="input" placeholder="Input"></textarea><br/>
+        <input type="text" id="length" placeholder="Length">
+        <input type="text" id="order" placeholder="Order">
+        <button onClick="generate()" style="background: #AA8439;">Generate</button>
         <div>
             <p id="output">(Output)</p>
         </div>
