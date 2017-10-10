@@ -271,6 +271,43 @@ function tryGenerate(input,data)
     var out = createText(start, length, t[0], order, t[1]);
     document.getElementById("output").value = out;
 }
+function readFile()
+{
+    var file = "cmudict";
+    var client = new XMLHttpRequest();
+    client.open('GET', '/ipa/'+file+'.txt');
+    client.onreadystatechange = function() {
+      input = client.responseText;
+    client.send();
+    }
+}
+function getPhonemes(i)
+{
+    //Ensure correct format, remove punctuation
+    input = i.replace(/\n/g, '');
+    var phonA = [];
+    var dict = readFile().split("\n");
+    var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
+                            K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
+                            T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,z:133906};
+    var iwords = (input.split(" ")).toUpperCase();
+    for (var i = 0, len = iwords.length; i < len; i++)
+    {
+        var w = iwords[i];
+        var re = new RegExp("^"+w+" ", "g");
+        for(var j = alphabetIndicies[w[0]]; j<alphabetIndicies[nextLetter(w[0])]; j++)
+        {
+            var wordline = dict[j];
+            if(wordline.match(re))
+            {
+                phonA.append(wordline.replace(re,""))
+                break;
+            }
+        }
+        phonA.append(" ");
+    }
+    return phonA;
+}
 function generateIPA() 
 {
     //Read inputs
@@ -286,24 +323,26 @@ function generateIPA()
     document.getElementById("data").value = "";
     var phonA = [];
     var iwords = input.split(" ");
-    var database = firebase.database();
-    for (var i = 0, len = iwords.length; i < len; i++)
-    {
-        var w = iwords[i];
-        w = w+" ";
-        console.log(w);
-        database.ref('/ARP/'+w).once('value').then(function(snapshot) {
-            if(snapshot.val()!=null && snapshot.val()!=undefined)
-            {
-                var p = snapshot.val().phonemes;
-                console.log(p);
-                document.getElementById("data").value += p + " ";
-                tryGenerate(input, document.getElementById("data").value);
-                phonA.push(p);
-            }
-        });
-        phonA.push(" ");
-    }
+    // var database = firebase.database();
+    // for (var i = 0, len = iwords.length; i < len; i++)
+    // {
+    //     var w = iwords[i];
+    //     w = w+" ";
+    //     console.log(w);
+    //     database.ref('/ARP/'+w).once('value').then(function(snapshot) {
+    //         if(snapshot.val()!=null && snapshot.val()!=undefined)
+    //         {
+    //             var p = snapshot.val().phonemes;
+    //             console.log(p);
+    //             document.getElementById("data").value += p + " ";
+    //             tryGenerate(input, document.getElementById("data").value);
+    //             phonA.push(p);
+    //         }
+    //     });
+    //     phonA.push(" ");
+    // }
+    phonA = getPhonemes(input)
+    tryGenerate(input,phonA);
 }
 function generateText()
 {
