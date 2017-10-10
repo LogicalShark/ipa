@@ -1,6 +1,7 @@
 //Markov chains
 function createTable(input, order) 
 {
+    console.log("a");
     order = parseInt(order);
     var table = {};
     var size = 0;
@@ -12,9 +13,11 @@ function createTable(input, order)
         table[sub]["SIZE"] = 0;
         size++;
     }
+    console.log("b");
     //Count the following strings for each string
     for (var j = 0; j<(input.length - order - order); j++) 
     {
+        console.log("c");
         var index = input.substr(j, order);
         console.log(index);
         var k = j+order+0
@@ -22,6 +25,7 @@ function createTable(input, order)
         console.log(next);
         if(table[index][next]==undefined && next.length>0)
         {
+            console.log("d");
             table[index][next] = 1;
             table[index]["SIZE"] += 1;
         }
@@ -31,6 +35,7 @@ function createTable(input, order)
             table[index]["SIZE"] += 1;
         }
     }
+    console.log("e");
     return [table,size];
 }
 function createText(first, length, table, order, size) 
@@ -296,7 +301,6 @@ function generateText()
     var order = x[2].value;
     var start = x[3];
     //Generate output
-    console.log(input);
     var t = createTable(input, order);
     console.log(t);
     var out = createText(start, length, t[0], order, t[1]);
