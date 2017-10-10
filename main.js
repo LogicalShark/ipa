@@ -9,15 +9,17 @@ function createTable(input, order)
     {
         var sub = input.substr(i, order);
         table[sub] = {};
-        table[sub]["SIZE"] = 1;
+        table[sub]["SIZE"] = 0;
         size++;
     }
     //Count the following strings for each string
     for (var j = 0; j<(input.length - order - order); j++) 
     {
         var index = input.substr(j, order);
+        console.log(index);
         var k = j+order+0
         var next = input.substr(k, order);
+        console.log(next);
         if(table[index][next]==undefined && next.length>0)
         {
             table[index][next] = 1;
