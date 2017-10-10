@@ -230,35 +230,46 @@ function writeData()
 function readInputs()
 {
     var input = (document.getElementById("input")).value;
+    if(input.length == 0)
+    {
+        var select = document.getElementById("file");
+        var file = select.options[select.selectedIndex].value;
+        var client = new XMLHttpRequest();
+        client.open('GET', '/'+file+'.txt');
+        client.onreadystatechange = function() {
+          input = client.responseText;
+        }
+        client.send();
+    }
+
     var length = (document.getElementById("length")).value;
-    if(length == "")
+    if(length.length == 0)
         length = 1000;
+
     var order = (document.getElementById("order")).value;
     if(order == "" || order == "0")
         order = 4;
+
     var start = (document.getElementById("start")).value;
+
     return [input,length,order,start];
 }
 function tryGenerate(input,data)
 {
-    // if(input.split(" ").length <= data.split(" ").length)
-    // {
-        console.log(data);
-        var flattened = [];
-        for(var n = 0; n<data.length; n++)
-        {
-            var phons = data[n].split(" ");
-            flattened = flattened.concat(phons).concat(" ");
-        }
-        //Translate to IPA
-        var phonI = transform(flattened);
-        //Generate output
-        var t = createTable(phonI, order);
-        console.log(t);
-        var out = createText(start, length, t[0], order, t[1]);
-        document.getElementById("output").value = out;
-        console.log(out);
-    // }
+    console.log(data);
+    var flattened = [];
+    for(var n = 0; n<data.length; n++)
+    {
+        var phons = data[n].split(" ");
+        flattened = flattened.concat(phons).concat(" ");
+    }
+    //Translate to IPA
+    var phonI = transform(flattened);
+    //Generate output
+    var t = createTable(phonI, order);
+    console.log(t);
+    var out = createText(start, length, t[0], order, t[1]);
+    document.getElementById("output").value = out;
 }
 function generateIPA() 
 {
@@ -309,18 +320,3 @@ function generateText()
     document.getElementById("output").value = out;
     console.log(out);
 }
-
-        // var re = new RegExp("^"+w+" ", "g");
-        // for(var j = alphabetIndicies[w[0]]; j<alphabetIndicies[nextLetter(w[0])]; j++)
-        // {
-        //     var wordline = dict[j];
-        //     if(wordline.match(re))
-        //     {
-        //         phonA.push(wordline.replace(re,""))
-        //         break;
-        //     }
-        // }
-    // var dict = (document.getElementById("data").innerHTML).split("\n");
-    // var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
-    //                         K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
-    //                         T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,z:133906};

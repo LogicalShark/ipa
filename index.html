@@ -41,6 +41,7 @@
             padding: 0em;
             width: 16em;
             color: #003B1F;
+            background: #287650;
         }
         textarea{
             font-family: "Lucida Console", Monaco, monospace;
@@ -67,23 +68,28 @@
     <div id="main">
         <h1>English Generator</h1>
         <textarea rows="10" id="input" placeholder="Input"></textarea><br><br>
+        File
+        <select id="file">
+        <option selected="selected" value="one">File (optional)</option>
+        <option  value="trumptweets20171010">Trump Tweets</option>
+        </select>
         <input type="text" id="start" placeholder="Start">
         <input type="text" id="length" placeholder="Length">
         <input type="text" id="order" placeholder="Order"><br><br>
-        <button onClick="generateIPA()" style="background: #287650;">Generate Phonemes</button>
-        <button onClick="generateText()" style="background: #287650;">Generate Text</button><br><br><br>
+        <button onClick="generateIPA()">Generate Phonemes</button>
+        <button onClick="generateText()">Generate Text</button><br><br><br>
         <textarea id="output" placeholder="Output" rows="10"></textarea><br>
 
         <h1>Instructions</h1>
         <p>
             Input: Enter some sample text to generate from. For phonetic generation, the text must be in English and will ignore punctuation.<br>
+            File: Choose a pre-set text to generate from. Either provide your own input or choose a file.<br>
             First: The start of the output to initiate text creation. Must have the same number of characters as Order. Default: random.<br>
             Length: Enter the desired length of the output. Default: 1000 characters.<br>
             Order: Corresponds to the faithfulness to the original text. Higher order means faster computation and an output closer to the original text. Recommended range is 2 - 6. Default: 4.<br>
             Output: The output will be in <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a> without stress or punctuation. You can read it yourself or use a tool like Amazon Polly to hear it spoken.<br>
-
         <h1>About</h1>
-        <p>Created by Marcus Alder, 2017. <br\>Uses the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronunciation Dictionary</a> for phonetic data of English words. <a href="https://www.github.com/LogicalShark">My Github</a></p>
+        <p>Uses the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronunciation Dictionary</a> for phonetic data of English words and <a href="https://firebase.google.com/">Firebase</a> to store data. <br>Created by Marcus Alder, 2017. <a href="https://www.github.com/LogicalShark">My Github</a></p>
     </div>
 </body>
 <p id="data" style="display: none"></p>
