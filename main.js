@@ -296,6 +296,7 @@ function generateText()
     var order = x[2].value;
     var start = x[3];
     //Generate output
+    console.log(input);
     var t = createTable(input, order);
     console.log(t);
     var out = createText(start, length, t[0], order, t[1]);
