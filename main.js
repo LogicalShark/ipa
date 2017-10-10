@@ -256,6 +256,7 @@ function tryGenerate(input,data)
         var t = createTable(phonI, order);
         console.log(t);
         var out = createText(start, length, t[0], order, t[1]);
+        document.getElementById("output").value = out;
         console.log(out);
     // }
 }
@@ -305,6 +306,7 @@ function generateText()
     var t = createTable(input, order);
     console.log(t);
     var out = createText(start, length, t[0], order, t[1]);
+    document.getElementById("output").value = out;
     console.log(out);
 }
 
