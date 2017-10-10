@@ -235,7 +235,7 @@ function readInputs()
         var select = document.getElementById("file");
         var file = select.options[select.selectedIndex].value;
         var client = new XMLHttpRequest();
-        client.open('GET', '/'+file+'.txt');
+        client.open('GET', '/ipa/'+file+'.txt');
         client.onreadystatechange = function() {
           input = client.responseText;
         }
