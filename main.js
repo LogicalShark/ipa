@@ -13,7 +13,8 @@ function createTable(input, order)
         table[sub]["SIZE"] = 0;
         size++;
     }
-    console.log("b");
+    console.log(input.length);
+    console.log(order);
     //Count the following strings for each string
     for (var j = 0; j<(input.length - order - order); j++) 
     {
