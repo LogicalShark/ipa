@@ -234,7 +234,7 @@ function readInputs()
     if(length == "")
         length = 1000;
     var order = (document.getElementById("order")).value;
-    if(order == "")
+    if(order == "" || order == "0")
         order = 4;
     var start = (document.getElementById("start")).value;
     return [input,length,order,start];
@@ -299,7 +299,7 @@ function generateText()
     var x = readInputs();
     var input = x[0];
     var length = x[1];
-    var order = x[2].value;
+    var order = x[2];
     var start = x[3];
     //Generate output
     var t = createTable(input, order);
