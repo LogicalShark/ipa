@@ -269,7 +269,7 @@ function generateIPA()
     input = input.replace(/\n/g," ");
     input = input.replace(/\t/g," ");
     var length = x[1];
-    var order = x[2].value;
+    var order = x[2];
     var start = x[3];
     //Get phoneme data
     document.getElementById("data").value = "";
