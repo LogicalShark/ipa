@@ -273,13 +273,15 @@ function tryGenerate(input,data)
 }
 function readFile()
 {
+    var text = "";
     var file = "cmudict";
     var client = new XMLHttpRequest();
     client.open('GET', '/ipa/'+file+'.txt');
     client.onreadystatechange = function() {
-      input = client.responseText;
-    client.send();
+      text = client.responseText;
+      client.send();
     }
+    return text;
 }
 function getPhonemes(i)
 {
@@ -287,6 +289,7 @@ function getPhonemes(i)
     input = i.replace(/\n/g, '');
     var phonA = [];
     var dict = readFile().split("\n");
+    //Bucket by first letter
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
                             K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
                             T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,z:133906};
@@ -322,25 +325,6 @@ function generateIPA()
     //Get phoneme data
     document.getElementById("data").value = "";
     var phonA = [];
-    var iwords = input.split(" ");
-    // var database = firebase.database();
-    // for (var i = 0, len = iwords.length; i < len; i++)
-    // {
-    //     var w = iwords[i];
-    //     w = w+" ";
-    //     console.log(w);
-    //     database.ref('/ARP/'+w).once('value').then(function(snapshot) {
-    //         if(snapshot.val()!=null && snapshot.val()!=undefined)
-    //         {
-    //             var p = snapshot.val().phonemes;
-    //             console.log(p);
-    //             document.getElementById("data").value += p + " ";
-    //             tryGenerate(input, document.getElementById("data").value);
-    //             phonA.push(p);
-    //         }
-    //     });
-    //     phonA.push(" ");
-    // }
     phonA = getPhonemes(input)
     tryGenerate(input,phonA);
 }
