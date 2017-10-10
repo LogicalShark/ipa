@@ -229,19 +229,6 @@ function writeData()
 }
 function readInputs()
 {
-    var input = (document.getElementById("input")).value;
-    if(input.length == 0)
-    {
-        var select = document.getElementById("file");
-        var file = select.options[select.selectedIndex].value;
-        var client = new XMLHttpRequest();
-        client.open('GET', '/ipa/'+file+'.txt');
-        client.onreadystatechange = function() {
-          input = client.responseText;
-        }
-        client.send();
-    }
-
     var length = (document.getElementById("length")).value;
     if(length.length == 0)
         length = 1000;
@@ -251,10 +238,22 @@ function readInputs()
         order = 4;
 
     var start = (document.getElementById("start")).value;
-
+    var input = (document.getElementById("input")).value;
+    if(input.length == 0)
+    {
+        var sel = document.getElementById("file");
+        var file = sel.options[sel.selectedIndex].value;
+        var client = new XMLHttpRequest();
+        client.open('GET', '/ipa/'+file+'.txt');
+        client.onreadystatechange = function() {
+          input = client.responseText;
+          tryGenerate(input);
+        }
+        client.send();
+    }
     return [input,length,order,start];
 }
-function tryGenerate(input,data)
+function tryGenerate(input,first,order,length,data)
 {
     console.log(data);
     var flattened = [];
@@ -326,7 +325,7 @@ function generateIPA()
     document.getElementById("data").value = "";
     var phonA = [];
     phonA = getPhonemes(input)
-    tryGenerate(input,phonA);
+    tryGenerate(input,phonA,);
 }
 function generateText()
 {
