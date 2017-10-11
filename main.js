@@ -333,7 +333,6 @@ function generateIPA(input,length,order,start)
     function(error) {
       console.error("Dictonary File Error!", error);
     });
-    }
 }
 
 function generateText(input,length,order,start)
