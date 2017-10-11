@@ -42,7 +42,7 @@ function createText(start,length,table,order,size)
         chars = createNextChars(table[keys[Math.floor(Math.random()*size)]]);
     }
     var output = chars;
-    for (var k = 0; k<(length/order); k++) 
+    for (var k = 0; k<length; k+=order)
     {
         newchars = createNextChars(table[chars]);
         if(newchars!=undefined && newchars.length>0)
