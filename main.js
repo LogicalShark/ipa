@@ -260,10 +260,12 @@ function makeRequest(url)
 
 function readInput(input,length,order,start,checked)
 {
+    console.log(input);
     var sel = document.getElementById("file");
     var file = sel.options[sel.selectedIndex].value;
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
         input = input + response;
+        console.log(input);
         if(checked)
             generateIPA(start,input,length,order,start);
         else
@@ -321,6 +323,7 @@ function evaluateInput(dict,first,input,length,order,start)
 }
 function generateIPA(input,first,length,order,start) 
 {
+    console.log(input);
     input = input.toUpperCase();
     console.log(input);
     input = input.replace(/[^\w\s]/g,"");
@@ -348,6 +351,7 @@ function generateText(input,first,length,order,start)
 
 function generate()
 {
+    console.log(input);
     var input = (document.getElementById("input")).value;
     var length = (document.getElementById("length")).value;
     if(length.length == 0)
