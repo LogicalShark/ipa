@@ -282,16 +282,18 @@ function evaluateInput(input,length,order,start,dict)
     {
         var w = iwords[i];
         var re = new RegExp("^"+w+" ", "g");
+        console.log(w);
         for(var j = alphabetIndicies[w[0]]; j<alphabetIndicies[nextLetter(w[0])]; j++)
         {
+            console.log(w);
             var wordline = dict[j];
             if(wordline.match(re))
             {
                 phonA.push(wordline.replace(re,""))
+                phonA.push(" ");
                 break;
             }
         }
-        phonA.push(" ");
     }
     console.log(phonA);
     var flattened = [];
