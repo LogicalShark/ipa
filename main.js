@@ -309,11 +309,11 @@ function evaluateInput(dict,input,length,order,start)
             var wordline = dict[j];
             if(wordline.match(re))
             {
-                phonA.append(wordline.replace(re,""))
+                phonA.push(wordline.replace(re,""))
                 break;
             }
         }
-        phonA.append(" ");
+        phonA.push(" ");
     }
     finalizeOutput(input,first,order,length,phonA);
 }
@@ -325,7 +325,6 @@ function generateIPA(input,length,order,start)
     //Ensure correct format, remove punctuation
     var file = "cmudict";
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
-        console.log("Success!", response);
         evaluateInput(response,input,length,order,start);
     },
     function(error) {
