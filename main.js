@@ -1,4 +1,4 @@
-//Markov chains
+//---------------------------------Markov chains---------------------------------
 function createTable(input, order) 
 {
     console.log("a");
@@ -39,6 +39,7 @@ function createTable(input, order)
     console.log("e");
     return [table,size];
 }
+
 function createText(first, length, table, order, size) 
 {
     var keys = Object.keys(table);
@@ -63,10 +64,12 @@ function createText(first, length, table, order, size)
     }
     return output;
 }
+
 function sum(a,b)
 {
     return a+b;
 }
+
 function createNextChars(array)
 {
     if(array==undefined)
@@ -88,7 +91,6 @@ function createNextChars(array)
     }
 }
 
-//Get pronunciation data
 function nextLetter(s)
 {
     if(s==undefined || s.length == 0)
@@ -103,7 +105,7 @@ function nextLetter(s)
     });
 }
 
-//Get/play audio
+//---------------------------------Get/play audio---------------------------------
 function getAudioFiles(out)
 {
     audios = [];
@@ -154,6 +156,7 @@ function getAudioFiles(out)
         }
     }
 }
+
 function playAudio(audios)
 {
     for(var i = 0; i<audios.length; i++)
@@ -163,6 +166,7 @@ function playAudio(audios)
         a.play();
     }
 }
+
 function hasAFile(chars)
 {
     var audioFiles = []
@@ -170,7 +174,8 @@ function hasAFile(chars)
         return true;
     return false;
 }
-//ARPABET to IPA translation
+
+//---------------------------------ARPABET to IPA translation---------------------------------
 function uniques(a)
 {
     var seen = {};
@@ -178,6 +183,7 @@ function uniques(a)
         return seen.hasOwnProperty(item) ? false : (seen[item] = true);
     });
 }
+
 function transform(phonA)
 {
     //ARPABET and IPA phonemes
@@ -204,7 +210,7 @@ function transform(phonA)
     return out;
 }
 
-//Main functions
+//---------------------------------Get pronunciation data---------------------------------
 function writeData()
 {
     var database = firebase.database();
@@ -227,35 +233,51 @@ function writeData()
         }
     }
 }
-function readInputs()
+
+//---------------------------------Main functions---------------------------------
+function makeRequest(url) 
 {
-    var length = (document.getElementById("length")).value;
-    if(length.length == 0)
-        length = 1000;
+    return new Promise(function(resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.open('GET', url);
 
-    var order = (document.getElementById("order")).value;
-    if(order == "" || order == "0")
-        order = 4;
-
-    var start = (document.getElementById("start")).value;
-    var input = (document.getElementById("input")).value;
-    if(input.length == 0)
-    {
-        var sel = document.getElementById("file");
-        var file = sel.options[sel.selectedIndex].value;
-        var client = new XMLHttpRequest();
-        client.open('GET', '/ipa/'+file+'.txt');
-        client.onreadystatechange = function() {
-          input = client.responseText;
-          tryGenerate(input);
-        }
-        client.send();
-    }
-    return [input,length,order,start];
+        req.onload = function() {
+            if (req.status == 200) 
+            {
+                resolve(req.response);
+            }
+            else 
+            {
+                reject(Error(req.statusText));
+            }
+        };
+        req.onerror = function() {
+            reject(Error("Network Error"));
+        };
+        req.send();
+    });
 }
-function tryGenerate(input,first,order,length,data)
+
+function readInput(input,length,order,start,checked)
 {
-    console.log(data);
+    var sel = document.getElementById("file");
+    var file = sel.options[sel.selectedIndex].value;
+    makeRequest('/ipa/'+file+'.txt').then(function(response) {
+        console.log("Success!", response);
+        input = input + response;
+        if(checked)
+            generateIPA(input,length,order,start);
+        else
+            generateText(input,length,order,start);
+    },
+    function(error) {
+      console.error("Input File Error!", error);
+    });
+    }
+}
+
+function finalizeOutput(input,first,order,length,data)
+{
     var flattened = [];
     for(var n = 0; n<data.length; n++)
     {
@@ -270,29 +292,14 @@ function tryGenerate(input,first,order,length,data)
     var out = createText(start, length, t[0], order, t[1]);
     document.getElementById("output").value = out;
 }
-function readFile()
+
+function evaluateInput(dict,input,length,order,start)
 {
-    var text = "";
-    var file = "cmudict";
-    var client = new XMLHttpRequest();
-    client.open('GET', '/ipa/'+file+'.txt');
-    client.onreadystatechange = function() {
-      text = client.responseText;
-      client.send();
-    }
-    return text;
-}
-function getPhonemes(i)
-{
-    //Ensure correct format, remove punctuation
-    input = i.replace(/\n/g, '');
-    var phonA = [];
-    var dict = readFile().split("\n");
     //Bucket by first letter
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
                             K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
                             T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,z:133906};
-    var iwords = (input.split(" ")).toUpperCase();
+    var iwords = input.split(" ");
     for (var i = 0, len = iwords.length; i < len; i++)
     {
         var w = iwords[i];
@@ -308,37 +315,46 @@ function getPhonemes(i)
         }
         phonA.append(" ");
     }
-    return phonA;
+    finalizeOutput(input,first,order,length,phonA);
 }
-function generateIPA() 
+function generateIPA(input,length,order,start) 
 {
-    //Read inputs
-    var x = readInputs();
-    var input = x[0].toUpperCase();
+    input = input.toUpperCase();
     input = input.replace(/[^\w\s]/g,"");
-    input = input.replace(/\n/g," ");
-    input = input.replace(/\t/g," ");
-    var length = x[1];
-    var order = x[2];
-    var start = x[3];
-    //Get phoneme data
-    document.getElementById("data").value = "";
+    input = input.replace(/\s+/g," ");
+    //Ensure correct format, remove punctuation
     var phonA = [];
-    phonA = getPhonemes(input)
-    tryGenerate(input,phonA,);
+    var dict = readFile().split("\n");
+    var text = "";
+    var file = "cmudict";
+    makeRequest('/ipa/'+file+'.txt').then(function(response) {
+        console.log("Success!", response);
+        evaluateInput(response,input,length,order,start);
+    },
+    function(error) {
+      console.error("Dictonary File Error!", error);
+    });
+    }
 }
-function generateText()
+
+function generateText(input,length,order,start)
 {
-    //Read inputs
-    var x = readInputs();
-    var input = x[0];
-    var length = x[1];
-    var order = x[2];
-    var start = x[3];
     //Generate output
     var t = createTable(input, order);
     console.log(t);
     var out = createText(start, length, t[0], order, t[1]);
     document.getElementById("output").value = out;
-    console.log(out);
+}
+
+function generate()
+{
+    var input = (document.getElementById("input")).value;
+    var length = (document.getElementById("length")).value;
+    if(length.length == 0)
+        length = 1000;
+    var order = (document.getElementById("order")).value;
+    if(order == "" || order == "0")
+        order = 4;
+    var start = (document.getElementById("start")).value;
+    readInput(input,length,order,start,document.getElementById("cb").checked);
 }
