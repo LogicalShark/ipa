@@ -322,7 +322,9 @@ function evaluateInput(dict,first,input,length,order,start)
 function generateIPA(input,first,length,order,start) 
 {
     input = input.toUpperCase();
+    console.log(input);
     input = input.replace(/[^\w\s]/g,"");
+    console.log(input);
     input = input.replace(/\s+/g," ");
     console.log(input);
     //Ensure correct format, remove punctuation
