@@ -259,7 +259,7 @@ function readInput(input,length,order,start,checked)
     var sel = document.getElementById("file");
     var file = sel.options[sel.selectedIndex].value;
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
-        input = input + response;
+        input = input + responseText;
         if(checked)
             generateIPA(input,length,order,start);
         else
