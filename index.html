@@ -76,10 +76,10 @@
   .slider {
       position: absolute;
       cursor: pointer;
-      top: 0px;
-      left: 0px;
-      right: 0px;
-      bottom: 0px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background-color: #287650;
       -webkit-transition: .4s;
       transition: .4s;
@@ -87,8 +87,6 @@
 
   .slider:before {
       position: absolute;
-      left: 1px;
-      bottom: 1px;
       content: "";
       height: 1em;
       width: 1em;
@@ -96,6 +94,7 @@
       -webkit-transition: .4s;
       transition: .4s;
   }
+
   input:focus + .slider {
       box-shadow: 0 0 0px #2196F3;
   }
