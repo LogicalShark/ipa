@@ -1,5 +1,5 @@
 //---------------------------------Markov chains---------------------------------
-function createTable(input, order) 
+function createTable(input,order) 
 {
     console.log("a");
     order = parseInt(order);
@@ -40,7 +40,7 @@ function createTable(input, order)
     return [table,size];
 }
 
-function createText(start, length, table, order, size) 
+function createText(start,length,table,order,size) 
 {
     var keys = Object.keys(table);
     var chars = start;
@@ -234,7 +234,6 @@ function writeData()
     }
 }
 
-//---------------------------------Main functions---------------------------------
 function makeRequest(url) 
 {
     return new Promise(function(resolve, reject) {
@@ -258,6 +257,8 @@ function makeRequest(url)
     });
 }
 
+//---------------------------------Main functions---------------------------------
+
 function readInput(input,length,order,start,checked)
 {
     var sel = document.getElementById("file");
@@ -265,33 +266,16 @@ function readInput(input,length,order,start,checked)
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
         input = input + response;
         if(checked)
-            generateIPA(start,input,length,order,start);
+            generateIPA(input,length,order,start);
         else
-            generateText(start,input,length,order,start);
+            generateText(input,length,order,start);
     },
     function(error) {
       console.error("Input File Error!", error);
     });
 }
 
-function finalizeOutput(input,start,order,length,data)
-{
-    var flattened = [];
-    for(var n = 0; n<data.length; n++)
-    {
-        var phons = data[n].split(" ");
-        flattened = flattened.concat(phons).concat(" ");
-    }
-    //Translate to IPA
-    var phonI = transform(flattened);
-    //Generate output
-    var t = createTable(phonI, order);
-    console.log(t);
-    var out = createText(start, length, t[0], order, t[1]);
-    document.getElementById("output").value = out;
-}
-
-function evaluateInput(dict,input,length,order,start)
+function evaluateInput(input,length,order,start,dict)
 {
     //Bucket by first letter
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
@@ -314,7 +298,20 @@ function evaluateInput(dict,input,length,order,start)
         }
         phonA.push(" ");
     }
-    finalizeOutput(input,start,order,length,phonA);
+
+    var flattened = [];
+    for(var n = 0; n<phonA.length; n++)
+    {
+        var phons = phonA[n].split(" ");
+        flattened = flattened.concat(phons).concat(" ");
+    }
+    //Translate to IPA
+    var phonI = transform(flattened);
+    //Generate output
+    var t = createTable(phonI, order);
+    console.log(t);
+    var out = createText(start, length, t[0], order, t[1]);
+    document.getElementById("output").value = out;
 }
 function generateIPA(input,length,order,start) 
 {
@@ -324,7 +321,7 @@ function generateIPA(input,length,order,start)
     //Ensure correct format, remove punctuation
     var file = "cmudict";
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
-        evaluateInput(response,input,length,order,start);
+        evaluateInput(input,length,order,start,response);
     },
     function(error) {
       console.error("Dictonary File Error!", error);
