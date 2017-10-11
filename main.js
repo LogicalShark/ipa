@@ -263,7 +263,6 @@ function readInput(input,length,order,start,checked)
     var sel = document.getElementById("file");
     var file = sel.options[sel.selectedIndex].value;
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
-        console.log("Success!", response);
         input = input + response;
         if(checked)
             generateIPA(start,input,length,order,start);
@@ -277,6 +276,7 @@ function readInput(input,length,order,start,checked)
 
 function finalizeOutput(input,first,order,length,data)
 {
+    console.log(data);
     var flattened = [];
     for(var n = 0; n<data.length; n++)
     {
@@ -298,11 +298,13 @@ function evaluateInput(dict,first,input,length,order,start)
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
                             K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
                             T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,z:133906};
+    console.log(input);
     var iwords = input.split(" ");
     var phonA = [];
     for (var i = 0, len = iwords.length; i < len; i++)
     {
         var w = iwords[i];
+        console.log(w);
         var re = new RegExp("^"+w+" ", "g");
         for(var j = alphabetIndicies[w[0]]; j<alphabetIndicies[nextLetter(w[0])]; j++)
         {
@@ -322,6 +324,7 @@ function generateIPA(input,first,length,order,start)
     input = input.toUpperCase();
     input = input.replace(/[^\w\s]/g,"");
     input = input.replace(/\s+/g," ");
+    console.log(input);
     //Ensure correct format, remove punctuation
     var file = "cmudict";
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
