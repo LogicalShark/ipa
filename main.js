@@ -1,7 +1,6 @@
 //---------------------------------Markov chains---------------------------------
 function createTable(input,order) 
 {
-    console.log("a");
     order = parseInt(order);
     var table = {};
     var size = 0;
@@ -18,12 +17,9 @@ function createTable(input,order)
     //Count the following strings for each string
     for (var j = 0; j<(input.length - order - order); j++) 
     {
-        console.log("c");
         var index = input.substr(j, order);
-        console.log(index);
         var k = j+order+0
         var next = input.substr(k, order);
-        console.log(next);
         if(table[index][next]==undefined && next.length>0)
         {
             console.log("d");
@@ -36,7 +32,6 @@ function createTable(input,order)
             table[index]["SIZE"] += 1;
         }
     }
-    console.log("e");
     return [table,size];
 }
 
@@ -298,16 +293,18 @@ function evaluateInput(input,length,order,start,dict)
         }
         phonA.push(" ");
     }
-
+    console.log(phonA);
     var flattened = [];
     for(var n = 0; n<phonA.length; n++)
     {
         var phons = phonA[n].split(" ");
         flattened = flattened.concat(phons).concat(" ");
     }
+    console.log(flattened);
     //Translate to IPA
     var phonI = transform(flattened);
     //Generate output
+    console.log(phonI);
     var t = createTable(phonI, order);
     console.log(t);
     var out = createText(start, length, t[0], order, t[1]);
