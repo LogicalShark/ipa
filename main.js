@@ -12,8 +12,6 @@ function createTable(input,order)
         table[sub]["SIZE"] = 0;
         size++;
     }
-    console.log(input.length);
-    console.log(order);
     //Count the following strings for each string
     for (var j = 0; j<(input.length - order - order); j++) 
     {
@@ -258,7 +256,7 @@ function readInput(input,length,order,start,checked)
 {
     var sel = document.getElementById("file");
     var file = sel.options[sel.selectedIndex].value;
-    makeRequest('/ipa/'+file+'.txt').then(function(response) {
+    makeRequest('/ipa/texts/'+file+'.txt').then(function(response) {
         input = input + response;
         if(checked)
             generateIPA(input,length,order,start);
