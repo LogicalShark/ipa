@@ -299,6 +299,7 @@ function evaluateInput(dict,input,length,order,start)
                             K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
                             T:118031,U:123666,V:125466,W:127796,X:132182,Y:132261,Z:132989,z:133906};
     var iwords = input.split(" ");
+    var phonA = [];
     for (var i = 0, len = iwords.length; i < len; i++)
     {
         var w = iwords[i];
@@ -322,9 +323,6 @@ function generateIPA(input,length,order,start)
     input = input.replace(/[^\w\s]/g,"");
     input = input.replace(/\s+/g," ");
     //Ensure correct format, remove punctuation
-    var phonA = [];
-    var dict = readFile().split("\n");
-    var text = "";
     var file = "cmudict";
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
         console.log("Success!", response);
