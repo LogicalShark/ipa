@@ -40,11 +40,11 @@ function createTable(input, order)
     return [table,size];
 }
 
-function createText(first, length, table, order, size) 
+function createText(start, length, table, order, size) 
 {
     var keys = Object.keys(table);
-    var chars = first;
-    if(first =="" || table.first == undefined)
+    var chars = start;
+    if(start =="" || table.start == undefined)
     {
         chars = createNextChars(table[keys[Math.floor(Math.random()*size)]]);
     }
@@ -276,7 +276,7 @@ function readInput(input,length,order,start,checked)
     });
 }
 
-function finalizeOutput(input,first,order,length,data)
+function finalizeOutput(input,start,order,length,data)
 {
     console.log(data);
     var flattened = [];
@@ -294,7 +294,7 @@ function finalizeOutput(input,first,order,length,data)
     document.getElementById("output").value = out;
 }
 
-function evaluateInput(dict,first,input,length,order,start)
+function evaluateInput(dict,input,length,order,start)
 {
     //Bucket by first letter
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
@@ -319,28 +319,25 @@ function evaluateInput(dict,first,input,length,order,start)
         }
         phonA.push(" ");
     }
-    finalizeOutput(input,first,order,length,phonA);
+    finalizeOutput(input,start,order,length,phonA);
 }
-function generateIPA(input,first,length,order,start) 
+function generateIPA(input,length,order,start) 
 {
     console.log(input);
     input = input.toUpperCase();
-    console.log(input);
     input = input.replace(/[^\w\s]/g,"");
-    console.log(input);
     input = input.replace(/\s+/g," ");
-    console.log(input);
     //Ensure correct format, remove punctuation
     var file = "cmudict";
     makeRequest('/ipa/'+file+'.txt').then(function(response) {
-        evaluateInput(response,first,input,length,order,start);
+        evaluateInput(response,input,length,order,start);
     },
     function(error) {
       console.error("Dictonary File Error!", error);
     });
 }
 
-function generateText(input,first,length,order,start)
+function generateText(input,length,order,start)
 {
     //Generate output
     var t = createTable(input, order);
