@@ -238,7 +238,7 @@ function makeRequest(url)
         req.onload = function() {
             if (req.status == 200) 
             {
-                resolve(req.response);
+                resolve(req.responseText);
             }
             else 
             {
@@ -272,6 +272,7 @@ function readInput(input,length,order,start,checked)
 
 function evaluateInput(input,length,order,start,dict)
 {
+    console.log(dict);
     //Bucket by first letter
     var alphabetIndicies = {A:127,B:7362,C:17044,D:27737,E:35475,F:40208,G:45422,H:51129,I:57571,J:60959,
                             K:62628,L:66784,M:72292,N:81821,O:85026,P:88008,Q:96254,R:96710,S:104038,
@@ -282,12 +283,9 @@ function evaluateInput(input,length,order,start,dict)
     {
         var w = iwords[i];
         var re = new RegExp("^"+w+" ", "g");
-        console.log(w);
         for(var j = alphabetIndicies[w.charAt(0)]; j<alphabetIndicies[nextLetter(w.charAt(0))]; j++)
         {
-            console.log(w);
             var wordline = dict[j];
-            console.log(wordline);
             if(wordline.match(re))
             {
                 phonA.push(wordline.replace(re,""))
@@ -296,7 +294,6 @@ function evaluateInput(input,length,order,start,dict)
             }
         }
     }
-    console.log(phonA);
     var flattened = [];
     for(var n = 0; n<phonA.length; n++)
     {
@@ -319,8 +316,7 @@ function generateIPA(input,length,order,start)
     input = input.replace(/[^\w\s]/g,"");
     input = input.replace(/\s+/g," ");
     //Ensure correct format, remove punctuation
-    var file = "cmudict";
-    makeRequest('/ipa/'+file+'.txt').then(function(response) {
+    makeRequest('/ipa/cmudict.txt').then(function(response) {
         evaluateInput(input,length,order,start,response);
     },
     function(error) {
