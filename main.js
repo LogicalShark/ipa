@@ -273,7 +273,6 @@ function readInput(input,length,order,start,checked)
     function(error) {
       console.error("Input File Error!", error);
     });
-    }
 }
 
 function finalizeOutput(input,first,order,length,data)
