@@ -283,10 +283,11 @@ function evaluateInput(input,length,order,start,dict)
         var w = iwords[i];
         var re = new RegExp("^"+w+" ", "g");
         console.log(w);
-        for(var j = alphabetIndicies[w[0]]; j<alphabetIndicies[nextLetter(w[0])]; j++)
+        for(var j = alphabetIndicies[w.charAt(0)]; j<alphabetIndicies[nextLetter(w.charAt(0))]; j++)
         {
             console.log(w);
             var wordline = dict[j];
+            console.log(wordline);
             if(wordline.match(re))
             {
                 phonA.push(wordline.replace(re,""))
