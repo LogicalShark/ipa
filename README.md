@@ -1,3 +1,3 @@
-# Enunciated English Text Generator
+# English Generator
 
-Hi
+This website generates text or ipa based on text (or its pronounced version).
