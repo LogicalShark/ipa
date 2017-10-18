@@ -20,7 +20,6 @@ function createTable(input,order)
         var next = input.substr(k, order);
         if(table[index][next]==undefined && next.length>0)
         {
-            console.log("d");
             table[index][next] = 1;
             table[index]["SIZE"] += 1;
         }
@@ -298,13 +297,10 @@ function evaluateInput(input,length,order,start,dict)
         var phons = phonA[n].split(" ");
         flattened = flattened.concat(phons).concat(" ");
     }
-    console.log(flattened);
     //Translate to IPA
     var phonI = transform(flattened);
     //Generate output
-    console.log(phonI);
     var t = createTable(phonI, order);
-    console.log(t);
     var out = createText(start, length, t[0], order, t[1]);
     document.getElementById("output").value = out;
 }
@@ -326,7 +322,6 @@ function generateText(input,length,order,start)
 {
     //Generate output
     var t = createTable(input, order);
-    console.log(t);
     var out = createText(start, length, t[0], order, t[1]);
     document.getElementById("output").value = out;
 }
