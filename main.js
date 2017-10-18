@@ -280,12 +280,12 @@ function readInput(input,length,order,start,checked)
     var sel = document.getElementById("file");
     var file = sel.options[sel.selectedIndex].value;
     makeRequest('/ipa/texts/'+file+'.txt').then(function(response) {
-        if(response.length > 2000)
+        if(response.length > 50000)
         {
             var start = Math.floor(Math.random()*response.length);
-            var r = response.substr(start,2000);
-            if((response.length - start) < 2000)
-                r+=response.substr(0,2000-(response.length-start))
+            var r = response.substr(start,50000);
+            if((response.length - start) < 50000)
+                r+=response.substr(0,50000-(response.length-start))
             response = r;
         }
         input = input + response;
