@@ -204,10 +204,33 @@ function transform(phonA)
 }
 
 //---------------------------------Get pronunciation data---------------------------------
+/*
 function writeData()
 {
     var database = firebase.database();
     var dict = (document.getElementById("data").innerHTML).split("\n");
+    for (var i = 0; i < dict.length; i++)
+    {
+        var l = dict[i];
+        var re = new RegExp("^[A-Z]+ ", "g");
+        if(l.match(re))
+        {
+            var word = l.match(re)[0];
+            var apronu = l.replace(re,"");
+            var ipronu = transform(apronu);
+            firebase.database().ref('ARP/' + word).set({
+                phonemes : apronu
+            });
+            firebase.database().ref('IPA/' + word).set({
+                phonemes : ipronu
+            });            
+        }
+    }
+}
+*/
+function writeInput()
+{
+    var database = firebase.database();
     for (var i = 0; i < dict.length; i++)
     {
         var l = dict[i];
@@ -257,6 +280,14 @@ function readInput(input,length,order,start,checked)
     var sel = document.getElementById("file");
     var file = sel.options[sel.selectedIndex].value;
     makeRequest('/ipa/texts/'+file+'.txt').then(function(response) {
+        if(response.length > 2000)
+        {
+            var start = Math.floor(Math.random()*response.length);
+            var r = response.substr(start,2000);
+            if((response.length - start) < 2000)
+                r+=response.substr(0,2000-(response.length-start))
+            response = r;
+        }
         input = input + response;
         if(checked)
             generateIPA(input,length,order,start);
