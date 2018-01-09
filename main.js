@@ -203,7 +203,7 @@ function transform(phonA)
 }
 
 //---------------------------------Get pronunciation data---------------------------------
-/*
+/* will finish later probably
 function writeData()
 {
     var database = firebase.database();
@@ -359,9 +359,15 @@ function generateText(input,length,order,start)
 function switchMode()
 {
     if document.getElementById("header").innerHTML == "Text Generator"
+    {
         document.getElementById("header").innerHTML = "Phoneme Generator";
+        document.getElementById("title").innerHTML = "Phoneme Generator";
+    }
     else
+    {
         document.getElementById("header").innerHTML = "Text Generator";
+        document.getElementById("title").innerHTML = "Phoneme Generator";
+    }
 function generate()
 {
     var input = (document.getElementById("input")).value;
