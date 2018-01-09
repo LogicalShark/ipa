@@ -356,7 +356,12 @@ function generateText(input,length,order,start)
     var out = createText(start, length, t[0], order, t[1]);
     document.getElementById("output").value = out;
 }
-
+function switchMode()
+{
+    if document.getElementById("header").innerHTML == "Text Generator"
+        document.getElementById("header").innerHTML = "Phoneme Generator";
+    else
+        document.getElementById("header").innerHTML = "Text Generator";
 function generate()
 {
     var input = (document.getElementById("input")).value;
