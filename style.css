@@ -26,8 +26,8 @@ input, textarea {
   color: #545993;
 }
 
-input {
-  max-width: 11em;
+.settings1 {
+  font-size: 1.5em;
 }
 
 .settings1, .settings2 {
@@ -45,7 +45,7 @@ button {
 
 textarea {
   font-family: "Lucida Console", Monaco, monospace;
-  width: 35em;
+  width: 40em;
 }
 
 input:focus, textarea:focus {
@@ -81,6 +81,11 @@ a {
   display: inline-block;
   width: 2em;
   height: 1em;
+}
+
+select {
+  color: #76B195;
+  background: #29526D;
 }
 
 /* Hide default HTML checkbox */
@@ -121,10 +126,4 @@ input:checked+.slider:before {
   -webkit-transform: translateX(-1em);
   -ms-transform: translateX(-1em);
   transform: translateX(-1em);
-}
-
-select {
-  height: 1.4em;
-  color: #76B195;
-  background: #29526D;
 }
