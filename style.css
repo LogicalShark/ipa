@@ -68,8 +68,12 @@ a {
   color: #486F88;
 }
 
+.info {
+  text-align: left;
+}
+
 .sliderlabel {
-  margin: 8px
+  margin: 8px 0
 }
 
 .switch {

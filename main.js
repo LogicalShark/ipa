@@ -165,69 +165,6 @@ function transform(phonA) {
   return out;
 }
 
-//---------------------------------Get pronunciation data---------------------------------
-/* will finish later probably
-function writeData()
-{
-    var database = firebase.database();
-    var dict = (document.getElementById("data").innerHTML).split("\n");
-    for (var i = 0; i < dict.length; i++)
-    {
-        var l = dict[i];
-        var re = new RegExp("^[A-Z]+ ", "g");
-        if(l.match(re))
-        {
-            var word = l.match(re)[0];
-            var apronu = l.replace(re,"");
-            var ipronu = transform(apronu);
-            firebase.database().ref('ARP/' + word).set({
-                phonemes : apronu
-            });
-            firebase.database().ref('IPA/' + word).set({
-                phonemes : ipronu
-            });
-        }
-    }
-}
-*/
-function writeInput() {
-  var database = firebase.database();
-  for (var i = 0; i < dict.length; i++) {
-    var l = dict[i];
-    var re = new RegExp("^[A-Z]+ ", "g");
-    if (l.match(re)) {
-      var word = l.match(re)[0];
-      var apronu = l.replace(re, "");
-      var ipronu = transform(apronu);
-      firebase.database().ref('ARP/' + word).set({
-        phonemes: apronu
-      });
-      firebase.database().ref('IPA/' + word).set({
-        phonemes: ipronu
-      });
-    }
-  }
-}
-
-function makeRequest(url) {
-  return new Promise(function(resolve, reject) {
-    var req = new XMLHttpRequest();
-    req.open('GET', url);
-
-    req.onload = function() {
-      if (req.status == 200) {
-        resolve(req.responseText);
-      } else {
-        reject(Error(req.statusText));
-      }
-    };
-    req.onerror = function() {
-      reject(Error("Network Error"));
-    };
-    req.send();
-  });
-}
-
 //---------------------------------Main functions---------------------------------
 
 function readInput(input, length, order, start, checked) {
