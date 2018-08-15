@@ -84,6 +84,7 @@ a {
 }
 
 select {
+  height: 1em;
   color: #76B195;
   background: #29526D;
 }
