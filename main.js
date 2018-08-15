@@ -358,7 +358,7 @@ function generateText(input,length,order,start)
 }
 function switchMode()
 {
-    if document.getElementById("header").innerHTML == "Text Generator"
+    if(document.getElementById("header").innerHTML == "Text Generator")
     {
         document.getElementById("header").innerHTML = "Phoneme Generator";
         document.getElementById("title").innerHTML = "Phoneme Generator";
@@ -368,6 +368,7 @@ function switchMode()
         document.getElementById("header").innerHTML = "Text Generator";
         document.getElementById("title").innerHTML = "Phoneme Generator";
     }
+}
 function generate()
 {
     var input = (document.getElementById("input")).value;
