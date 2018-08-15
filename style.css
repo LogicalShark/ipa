@@ -1,61 +1,78 @@
     body {
-        font-family: "Trebuchet MS", Helvetica, sans-serif;
-        text-align:center;
-        background:#29526D;
+      font-family: "Trebuchet MS", Helvetica, sans-serif;
+      text-align: center;
+      background: #29526D;
     }
-    input,textarea,button {
-        font-size: 1.2em;
-        outline: none;
-        border: none;
-        box-shadow: none;
+
+    input, textarea, button {
+      font-size: 1.2em;
+      outline: none;
+      border: none;
+      box-shadow: none;
     }
-    input,textarea {
-        background: #090B3B;
-        color: #545993;
+
+    input, textarea {
+      background: #090B3B;
+      color: #545993;
     }
-    input{
-        width: 11em;
+
+    input {
+      width: 11em;
     }
+
     .settings {
       display: flex;
+      align-items: space-around;
     }
-    button{
-        padding: 0em;
-        width: 16em;
-        color: #003B1F;
-        background: #287650;
+
+    button {
+      padding: 0em;
+      width: 16em;
+      color: #003B1F;
+      background: #287650;
     }
-    textarea{
-        font-family: "Lucida Console", Monaco, monospace;
-        width: 35em;
+
+    textarea {
+      font-family: "Lucida Console", Monaco, monospace;
+      width: 35em;
     }
-    input:focus,textarea:focus {
-        color: #7F81B1;
-        background: #090B3B;
+
+    input:focus, textarea:focus {
+      color: #7F81B1;
+      background: #090B3B;
     }
-    #main{
-        top:0;
-        width:100%;
-        padding:0em;
-        margin: 0em;
-        background:#333676;
-        color: #708FA3;
+
+    .main {
+      top: 0;
+      width: 100%;
+      padding: 0em;
+      margin: 0em;
+      background: #333676;
+      color: #708FA3;
+      display: flex;
+      flex-direction: column;
     }
+
     a {
-        color: #486F88;
+      color: #486F88;
     }
+
     .switch {
       position: relative;
       display: inline-block;
       width: 2em;
       height: 1em;
-  }
+    }
 
-  /* Hide default HTML checkbox */
-  .switch input {display:none;}
+    /* Hide default HTML checkbox */
 
-  /* The slider */
-  .slider {
+    .switch input {
+      display: none;
+    }
+
+    /* The slider */
+
+    .slider {
       position: absolute;
       cursor: pointer;
       top: 0;
@@ -65,9 +82,9 @@
       background-color: #287650;
       -webkit-transition: .4s;
       transition: .4s;
-  }
+    }
 
-  .slider:before {
+    .slider:before {
       position: absolute;
       content: "";
       height: 1em;
@@ -75,19 +92,20 @@
       background-color: white;
       -webkit-transition: .4s;
       transition: .4s;
-  }
+    }
 
-  input:focus + .slider {
+    input:focus+.slider {
       box-shadow: 0 0 0px #2196F3;
-  }
+    }
 
-  input:checked + .slider:before {
+    input:checked+.slider:before {
       -webkit-transform: translateX(-1em);
       -ms-transform: translateX(-1em);
       transform: translateX(-1em);
-  }
-  select {
-    height: 1.4em;
-    color: #76B195;
-    background: #29526D;
-  }
+    }
+
+    select {
+      height: 1.4em;
+      color: #76B195;
+      background: #29526D;
+    }
