@@ -15,7 +15,7 @@ body {
 }
 
 input, textarea, button {
-  font-size: 1.2em;
+  font-size: 1.5em;
   outline: none;
   border: none;
   margin: 8px;
@@ -38,7 +38,7 @@ input {
 
 button {
   padding: 0em;
-  max-width: 16em;
+  min-width: 16em;
   color: #003B1F;
   background: #287650;
 }
