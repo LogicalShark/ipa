@@ -12,34 +12,37 @@
   <div class="main">
     <h1 id="header">Text Generator</h1>
     <textarea rows="10" id="input" placeholder="Input"></textarea><br><br>
-    <select id="file">
+    <div class="settings1">
+      <select id="file">
             <option selected="selected" value="emptyfile">Example File (optional)</option>
             <option  value="anime">Anime Titles</option>
             <option  value="dbg_I">De Bello Gallico I (Latin)</option>
             <option  value="20171010trumptweetsnolinks">Trump Tweets '09-'17 (slow)</option>
         </select>&emsp;&emsp;&emsp; Pronunciation
-    <label class="switch">
+      <label class="switch">
           <input type="checkbox" id="check">
           <span class="slider" onClick="switchMode()"></span>
         </label>&nbsp;Text<br><br>
-    <div class="settings">
+    </div>
+    <div class="settings2">
       <input type="text" id="start" placeholder="Start">
       <input type="text" id="length" placeholder="Length">
       <input type="text" id="order" placeholder="Order">
     </div>
     <button onClick="generate()">Generate</button><br><br><br>
     <textarea id="output" placeholder="Output" rows="10"></textarea><br>
-
-    <h1>Instructions</h1>
-    <p style="text-align:left; display: inline-block;">
-      <b>Input</b>: Enter some sample text to generate from. For phonetic generation, the text must be in English and will ignore punctuation.<br>
-      <b>File</b>: Choose a pre-set text to generate from. Either provide your own input or choose a file.<br>
-      <b>First</b>: The start of the output to initiate text creation. Must have the same number of characters as Order. Default: random.<br>
-      <b>Length</b>: Enter the desired length of the output. Default: 1000 characters.<br>
-      <b>Order</b>: Corresponds to the faithfulness to the original text. Higher order means faster computation and an output closer to the original text. <br>&emsp;Recommended range is 2 - 6 for short inputs. Default: 4.<br>
-      <b>Output</b>: The output will be in <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a> without stress or punctuation. You can read it yourself or use a tool like Amazon Polly to hear it spoken.<br></p>
-    <h1>About</h1>
-    <p>Uses the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronunciation Dictionary</a> for phonetic data of English words and <a href="https://firebase.google.com/">Firebase</a> to store data. <br>Created by Marcus Alder, 2017. <a href="https://www.github.com/LogicalShark">My Github</a></p>
+    <div class="about">
+      <h1>Instructions</h1>
+      <p style="text-align:left; display: inline-block;">
+        <b>Input</b>: Enter some sample text to generate from. For phonetic generation, the text must be in English and will ignore punctuation.<br>
+        <b>File</b>: Choose a pre-set text to generate from. Either provide your own input or choose a file.<br>
+        <b>First</b>: The start of the output to initiate text creation. Must have the same number of characters as Order. Default: random.<br>
+        <b>Length</b>: Enter the desired length of the output. Default: 1000 characters.<br>
+        <b>Order</b>: Corresponds to the faithfulness to the original text. Higher order means faster computation and an output closer to the original text. <br>&emsp;Recommended range is 2 - 6 for short inputs. Default: 4.<br>
+        <b>Output</b>: The output will be in <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a> without stress or punctuation. You can read it yourself or use a tool like Amazon Polly to hear it spoken.<br></p>
+      <h1>About</h1>
+      <p>Uses the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronunciation Dictionary</a> for phonetic data of English words<br>Created by Marcus Alder, 2017. <a href="https://www.github.com/LogicalShark">My Github</a></p>
+    </div>
   </div>
 </body>
 <p id="data" style="display: none"></p>
