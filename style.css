@@ -68,6 +68,10 @@ a {
   color: #486F88;
 }
 
+.sliderlabel {
+  margin: 8px
+}
+
 .switch {
   position: relative;
   display: inline-block;
