@@ -270,11 +270,11 @@ function generateText(input, length, order, start) {
 
 function switchMode() {
   if (document.getElementById("header").innerHTML == "Text Generator") {
-    document.getElementById("header").innerHTML = "Phoneme Generator";
-    document.getElementById("title").innerHTML = "Phoneme Generator";
+    document.getElementById("header").innerHTML = "IPA Generator";
+    document.getElementById("title").innerHTML = "IPA Generator";
   } else {
     document.getElementById("header").innerHTML = "Text Generator";
-    document.getElementById("title").innerHTML = "Phoneme Generator";
+    document.getElementById("title").innerHTML = "IPA Generator";
   }
 }
 
@@ -286,6 +286,5 @@ function generate() {
   var order = (document.getElementById("order")).value;
   if (order == "" || order == "0")
     order = 4;
-  var start = (document.getElementById("start")).value;
-  readInput(input, length, order, start, document.getElementById("check").checked);
+  readInput(input, length, order, "", document.getElementById("check").checked);
 }
