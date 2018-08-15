@@ -18,98 +18,7 @@
     </script>
 
     <script type="text/javascript" src="main.js"></script>
-    <style type="text/css">
-    body {
-        font-family: "Trebuchet MS", Helvetica, sans-serif;
-        text-align:center;
-        background:#29526D;
-    }
-    input,textarea,button {
-        font-size: 1.2em;
-        outline: none;
-        border: none;
-        box-shadow: none;
-    }
-    input,textarea {
-        background: #090B3B;
-        color: #545993;
-    }
-    input{
-        width: 11em;
-    }
-    button{
-        padding: 0em;
-        width: 16em;
-        color: #003B1F;
-        background: #287650;
-    }
-    textarea{
-        font-family: "Lucida Console", Monaco, monospace;
-        width: 35em;
-    }
-    input:focus,textarea:focus {
-        color: #7F81B1;
-        background: #090B3B;
-    }
-    #main{
-        top:0;
-        width:100%;
-        padding:0em;
-        margin: 0em;
-        background:#333676;
-        color: #708FA3;
-    }
-    a {
-        color: #486F88;
-    }
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 2em;
-      height: 1em;
-  }
-
-  /* Hide default HTML checkbox */
-  .switch input {display:none;}
-
-  /* The slider */
-  .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #287650;
-      -webkit-transition: .4s;
-      transition: .4s;
-  }
-
-  .slider:before {
-      position: absolute;
-      content: "";
-      height: 1em;
-      width: 1em;
-      background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
-  }
-
-  input:focus + .slider {
-      box-shadow: 0 0 0px #2196F3;
-  }
-
-  input:checked + .slider:before {
-      -webkit-transform: translateX(-1em);
-      -ms-transform: translateX(-1em);
-      transform: translateX(-1em);
-  }
-  select {
-    height: 1.4em;
-    color: #76B195;
-    background: #29526D;
-  }
-</style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <div id="main">
@@ -127,9 +36,11 @@
           <input type="checkbox" id="cb">
           <span class="slider" onClick="switchMode()"></span>
         </label>&nbsp;Text<br><br>
+        <div class="settings">
         <input type="text" id="start" placeholder="Start">
         <input type="text" id="length" placeholder="Length">
-        <input type="text" id="order" placeholder="Order"><br><br>
+        <input type="text" id="order" placeholder="Order">
+      </div>
         <button onClick="generate()">Generate</button><br><br><br>
         <textarea id="output" placeholder="Output" rows="10"></textarea><br>
 
