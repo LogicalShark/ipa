@@ -14,7 +14,7 @@ body {
   justify-content: center;
 }
 
-input, textarea, button {
+input, textarea, button, select {
   font-size: 1.5em;
   outline: none;
   border: none;
@@ -48,6 +48,11 @@ textarea {
   width: 40em;
 }
 
+select {
+  color: #76B195;
+  background: #29526D;
+}
+
 input:focus, textarea:focus {
   color: #7F81B1;
   background: #090B3B;
@@ -56,8 +61,8 @@ input:focus, textarea:focus {
 .main {
   top: 0;
   width: 100%;
-  padding: 0em;
-  margin: 2em;
+  padding: 1em;
+  margin: 1em;
   background: #333676;
   color: #708FA3;
   display: flex;
@@ -81,12 +86,6 @@ a {
   display: inline-block;
   width: 2em;
   height: 1em;
-}
-
-select {
-  height: 2em;
-  color: #76B195;
-  background: #29526D;
 }
 
 /* Hide default HTML checkbox */
