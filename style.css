@@ -8,6 +8,11 @@ body {
   background: #29526D;
 }
 
+.main {
+  align-items: space-around;
+  justify-content: center;
+}
+
 input, textarea, button {
   font-size: 1.2em;
   outline: none;
@@ -25,8 +30,6 @@ input {
 
 .settings1, .settings2 {
   display: flex;
-  align-items: space-around;
-  justify-content: center;
 }
 
 button {
