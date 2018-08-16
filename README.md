@@ -1,3 +1,4 @@
-# Text/Phoneme Generator
+# Text/IPA Generator
 
-This website generates text or ipa based on text (or its pronounced version).
+This website generates text or ipa based on input using Markov chains.
+Pronunciation data from http://www.speech.cs.cmu.edu/cgi-bin/cmudict
