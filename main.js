@@ -170,7 +170,7 @@ function transform(phonA) {
 function readInput(input, length, order, start, checked) {
   var sel = document.getElementById("file");
   var file = sel.options[sel.selectedIndex].value;
-  makeRequest('/ipa/texts/' + file + '.txt').then(function(response) {
+  makeRequest('/ipagen/texts/' + file + '.txt').then(function(response) {
       if (response.length > 50000) {
         var start = Math.floor(Math.random() * response.length);
         var r = response.substr(start, 50000);
