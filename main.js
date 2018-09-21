@@ -271,7 +271,7 @@ function generateIPA(input, length, order, start) {
   input = input.replace(/[^\w\s]/g, "");
   input = input.replace(/\s+/g, " ");
   //Ensure correct format, remove punctuation
-  makeRequest('/ipa/cmudict.txt').then(function(response) {
+  makeRequest('/cmudict.txt').then(function(response) {
       evaluateInput(input, length, order, start, response);
     },
     function(error) {
